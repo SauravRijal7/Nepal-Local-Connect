@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Nepal Local Connect</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <form id="register-form">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+        <p id="error-msg" class="message"></p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_dRLjrZnMVg9XJNXrIHwJQ054TaV6a1U",
+            authDomain: "nepal-local-connect-16e2b.firebaseapp.com",
+            projectId: "nepal-local-connect-16e2b",
+            storageBucket: "nepal-local-connect-16e2b.appspot.com",
+            messagingSenderId: "174039102881",
+            appId: "1:174039102881:web:b483996d60febdf7c847e0",
+            measurementId: "G-352KVMWV3J"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Form & message
+        const registerForm = document.getElementById('register-form');
+        const errorMsg = document.getElementById('error-msg');
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Register user
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Add user to Firestore
+                await setDoc(doc(db, "users", user.uid), { name, email, rating: 0 });
+
+                // Success message
+                errorMsg.style.color = "green";
+                errorMsg.textContent = "Registration successful! Redirecting to login...";
+
+                // Redirect after 1.5 seconds
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 1500);
+
+            } catch (error) {
+                errorMsg.style.color = "red";
+                errorMsg.textContent = error.message;
+            }
+        });
+    </script>
+</body>
+</html>
