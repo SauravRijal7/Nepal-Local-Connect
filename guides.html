@@ -1,11 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Guides Directory</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .guide-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .guide-card img {
+      border-radius: 70%;
+      width: 100px;
+      height: 110px;
+      object-fit: cover;
+    }
+
+    .guide-details h2 {
+      margin: 0 0 10px 0;
+    }
+
+    .guide-details p {
+      margin: 5px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #007BFF;
+      color: white;
+      margin-top: 20px;
+    }
+
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <p> this is guides page.</p>
+
+  <header>
+    <h1>Local Guides Directory</h1>
+    <p>Find the best local guides for your adventures</p>
+  </header>
+
+  <div class="container">
+
+    <div class="guide-card">
+      <img src="reg1.jpg" alt="Alice Johnson">
+      <div class="guide-details">
+        <h2>Kami Rita Sherpa</h2>
+        <p><strong>Experience:</strong> 8 years</p>
+        <p><strong>Specialty:</strong> Climbing Mountains </p>
+        <p><strong>Contact:</strong> <a href="kamisherpa@gmail.com">kamisherpa@gmail.com</a></p>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <img src="g2.png" alt="gangabahadur">
+      <div class="guide-details">
+        <h2>Ganga Bahadur</h2>
+        <p><strong>Experience:</strong> 5 years</p>
+        <p><strong>Specialty:</strong> Hiking & Adventure</p>
+        <p><strong>Contact:</strong> <a href="gangabahadur@gmail.com">gangabahadur@gmail.com</a></p>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <img src="g3.png" alt="Sarala Basnet">
+      <div class="guide-details">
+        <h2>Sarala Basnet</h2>
+        <p><strong>Experience:</strong> 8 years</p>
+        <p><strong>Specialty:</strong> Food & Cultural Tours</p>
+        <p><strong>Contact:</strong> <a href="aralab7@gmail.com">saralab7@gmail.com</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2025 Local Guides Directory
+  </footer>
+
 </body>
 </html>
