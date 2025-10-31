@@ -1,104 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organization Dashboard - Nepal Local Connect</title>
-    <link rel="stylesheet" href="org_dashboard.css">
-</head>
-<body>
-    <div class="container">
-        <h2 id="welcome-msg">Welcome, Organization</h2>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organization Dashboard - Nepal Local Connect</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-        <h3>Add Your Business</h3>
-        <form id="business-form">
-            <input type="text" id="title" placeholder="Business Title" required>
-            <textarea id="description" placeholder="Business Description" required></textarea>
-            <input type="file" id="image" accept="image/*" required>
-            <button type="submit">Publish</button>
-        </form>
-        <p id="msg" class="message"></p>
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f8f9fb;
+  margin: 0;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: #1f1f1f;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidebar a {
+  color: #ddd;
+  text-decoration: none;
+  margin: 10px 0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: #3a3a3a;
+  color: #fff;
+}
+
+/* Main content */
+.main {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.header h2 {
+  color: #222;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+button.logout-btn {
+  background: #e53e3e;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button.logout-btn:hover {
+  background: #c53030;
+}
+
+/* Dashboard card */
+.dashboard-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+  margin-bottom: 30px;
+}
+
+.dashboard-card h3 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input[type="text"],
+textarea {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+textarea { resize: vertical; min-height: 90px; }
+
+button.publish-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button.publish-btn:hover { background: #1e40af; }
+
+.message { text-align: center; font-weight: 500; margin-top: 10px; }
+</style>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Local Connect</h2>
+    <a href="#" class="active">📊 Dashboard</a>
+    <a href="#">➕ Add Business</a>
+    <a href="#">⭐ Reviews</a>
+    <a href="#">⚙️ Settings</a>
+    <a href="#" id="logout">🚪 Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="header">
+      <h2 id="welcome-msg">Welcome, Organization</h2>
+      <button class="logout-btn" id="logout-btn">Logout</button>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+    <div class="dashboard-card">
+      <h3>Add Your Business</h3>
+      <form id="business-form">
+        <input type="text" id="title" placeholder="Business Title" required>
+        <input type="text" id="type" placeholder="Business Type" required>
+        <input type="text" id="contact" placeholder="Contact Number" required>
+        <input type="file" id="businessImage" />
+        <textarea id="description" placeholder="Business Description" required></textarea>
+        <button type="submit" class="publish-btn">Publish</button>
+      </form>
+      <p id="msg" class="message"></p>
+    </div>
+  </div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyC_dRLjrZnMVg9XJNXrIHwJQ054TaV6a1U",
-            authDomain: "nepal-local-connect-16e2b.firebaseapp.com",
-            projectId: "nepal-local-connect-16e2b",
-            storageBucket: "nepal-local-connect-16e2b.appspot.com",
-            messagingSenderId: "174039102881",
-            appId: "1:174039102881:web:b483996d60febdf7c847e0"
-        };
+<script type="module">
+import { getStorage, ref, uploadBytes, getDownloadURL } 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const storage = getStorage(app);
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-        const welcomeMsg = document.getElementById('welcome-msg');
-        const businessForm = document.getElementById('business-form');
-        const msg = document.getElementById('msg');
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyC_dRLjrZnMVg9XJNXrIHwJQ054TaV6a1U",
+  authDomain: "nepal-local-connect-16e2b.firebaseapp.com",
+  projectId: "nepal-local-connect-16e2b",
+  storageBucket: "nepal-local-connect-16e2b.appspot.com",
+  messagingSenderId: "174039102881",
+  appId: "1:174039102881:web:b483996d60febdf7c847e0"
+};
 
-        // Check if user is logged in and fetch org name
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const userDoc = await getDoc(doc(db, "users", user.uid));
-                if (!userDoc.exists() || userDoc.data().type !== "organization") {
-                    alert("Access denied. Not an organization.");
-                    window.location.href = "org_login.html";
-                    return;
-                }
-                welcomeMsg.textContent = `Welcome, ${userDoc.data().name}`;
-            } else {
-                window.location.href = "org_login.html";
-            }
-        });
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
 
-        // Publish business
-        businessForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const title = document.getElementById('title').value;
-            const description = document.getElementById('description').value;
-            const imageFile = document.getElementById('image').files[0];
 
-            if (!imageFile) {
-                msg.style.color = "red";
-                msg.textContent = "Please select an image.";
-                return;
-            }
+const welcomeMsg = document.getElementById('welcome-msg');
+const businessForm = document.getElementById('business-form');
+const msg = document.getElementById('msg');
+const logoutBtn = document.getElementById('logout-btn');
 
-            try {
-                const user = auth.currentUser;
+// Auth check
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (!userDoc.exists() || userDoc.data().type !== "organization") {
+      alert("Access denied. Not an organization.");
+      window.location.href = "org_login.html";
+      return;
+    }
+    welcomeMsg.textContent = `Welcome, ${userDoc.data().name}`;
+  } else {
+    window.location.href = "org_login.html";
+  }
+});
 
-                // Upload image to Firebase Storage
-                const storageRef = ref(storage, `business_images/${user.uid}_${Date.now()}_${imageFile.name}`);
-                await uploadBytes(storageRef, imageFile);
-                const imageUrl = await getDownloadURL(storageRef);
+// Logout
+logoutBtn.addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.href = "org_login.html";
+});
 
-                // Add business to Firestore
-                await addDoc(collection(db, "businesses"), {
-                    ownerUid: user.uid,
-                    title,
-                    description,
-                    imageUrl,
-                    createdAt: new Date(),
-                    ratingAverage: 0
-                });
+// Handle submit
+businessForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const title = document.getElementById('title').value;
+  const type = document.getElementById('type').value;
+  const contact = document.getElementById('contact').value;
+  const description = document.getElementById('description').value;
+  const file = document.getElementById('businessImage').files[0];
 
-                msg.style.color = "green";
-                msg.textContent = "Business published successfully!";
-                businessForm.reset();
+  try {
+    const user = auth.currentUser;
+     let imageUrl = "";
 
-            } catch (error) {
-                msg.style.color = "red";
-                msg.textContent = error.message;
-            }
-        });
-    </script>
+    // ✅ Upload image (if selected)
+    if (file) {
+      const storageRef = ref(storage, "businessImages/" + Date.now() + "_" + file.name);
+      await uploadBytes(storageRef, file);
+      imageUrl = await getDownloadURL(storageRef);
+    }
+    await addDoc(collection(db, "businesses"), {
+      ownerUid: user.uid,
+      title,
+      type,
+      contact,
+      description,
+      businessurl: imageurl,
+      createdAt: new Date(),
+      ratingAverage: 0
+
+    });
+
+    msg.style.color = "green";
+    msg.textContent = "✅ Business published successfully!";
+    businessForm.reset();
+  } catch (err) {
+    msg.style.color = "red";
+    msg.textContent = err.message;
+  }
+});
+</script>
 </body>
 </html>

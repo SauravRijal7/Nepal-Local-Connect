@@ -15,144 +15,220 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navigation">
-        <div class="container nav-container">
-            <div class="logo">
-                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 12h18M3 6h18M3 18h18"></path>
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg class="nav-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
                 </svg>
-                <span class="logo-text">Nepal Local Connect</span>
+                <span class="nav-title">Nepal Local Connect</span>
             </div>
             
-            <div class="nav-links">
-                <a href="#experiences" class="nav-link">Experiences</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#experiences" class="nav-link">Experiences</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="mobile-nav-actions">
+                    <button class="btn btn-outline btn-mobile" onclick="window.location.href='org_login.html'">Log In</button>
+                    <button class="btn btn-primary btn-mobile"onclick="window.location.href='org_register.html'">Get Started</button>
+                </li>
+            </ul>
+            
+            <div class="nav-actions">
+                    <button class="btn btn-outline btn-mobile" onclick="window.location.href='org_login.html'">Log In</button>
+                    <button class="btn btn-primary btn-mobile"onclick="window.location.href='org_register.html'">Get Started</button>
             </div>
             
-            <div class="nav-buttons">
-            <button class="btn btn-ghost" onclick="window.location.href='org_register.html'">Sign In</button>
-                <button class="btn btn-primary">Get Started</button>
-            </div>
-            
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
         </div>
     </nav>
+    <br>
+
     <!-- Hero Section -->
-    <section class="hero" style="background-image: url('images/hero-nepal.jpg');">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">Discover the Real Nepal</h1>
-                <p class="hero-description">
-                    Connect with local guides, authentic homestays, and cultural experiences. 
-                    Explore Nepal beyond the tourist trail.
-                </p>
-                <div class="hero-buttons">
-                    <button class="btn btn-hero btn-lg">
-                        Start Exploring
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                        </svg>
-                    </button>
-                    <button class="btn btn-secondary btn-lg">Learn More</button>
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-overlay"></div>
+            <img src="images/hero-nepal.jpg"  class="hero-image">
+        </div>
+         <br><br>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+               
+                <span>Discover Authentic Nepal</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="hero-title-line">Experience the</span>
+                <span class="hero-title-accent">Real Nepal</span>
+            </h1>
+            <p class="hero-text">
+                Connect with Nepali businesses, immerse yourself in authentic homestays, and discover 
+                cultural experiences beyond the tourist trail. Your journey to the heart of Nepal starts here.
+            </p>
+            <div class="hero-cta">
+                <button class="btn btn-large btn-glow">
+                    <span>Explore Nepal</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="btn btn-large btn-glass">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    </svg>
+<span>
+<a href="partners.html" class="partners-link"> Meet our Partners </a>
+</span>
+<style>
+.partners-link {
+  display: inline-block;
+  padding: 8px 14px;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+.partners-link:hover {
+  background: #1e40af;
+}
+</style>
+                </button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">2000+</span>
+                    <span class="stat-label">Satisfied Customers</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Experiences</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Destinations</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Categories Section -->
-    <section class="categories" id="experiences">
+    <section class="experiences" id="experiences">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Explore Local Experiences</h2>
-                <p class="section-description">
-                    Choose from our curated categories to find the perfect authentic Nepal experience
+                <span class="section-label">What We Offer</span>
+                <h2 class="section-title">Authentic Local Experiences</h2>
+                <p class="section-subtitle">
+                    Choose from our carefully curated categories and discover the authentic beauty of Nepal
                 </p>
             </div>
             
-            <div class="categories-grid">
-                <!-- Category 1: Local Guides -->
-                <div class="category-card">
-                    <div class="category-image-wrapper">
-                        <img src="images/guide.jpg" alt="Local Guides" class="category-image">
-                        <div class="category-overlay">
-                            <div class="category-icon-wrapper">
-                                <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="9" cy="7" r="4"></circle>
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                </svg>
-                                <h3 class="category-title">Local Guides</h3>
-                            </div>
+            <div class="experience-grid">
+                <article class="experience-card">
+                    <div class="experience-image">
+                        <img src="guide.jpg" alt="Local Guides">
+                        <div class="experience-badge">Popular</div>
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
                         </div>
+                        <h3 class="experience-title">Local Businesses</h3>
+                        <p class="experience-description">
+                            Expert businesses who know Nepal inside out, ready to show you hidden gems
+                        </p>
+                        <button class="experience-link">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="category-content">
-                        <p class="category-description">Expert local guides who know the hidden gems and authentic stories of Nepal</p>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Category 2: Homestays -->
-                <div class="category-card">
-                    <div class="category-image-wrapper">
-                        <img src="images/homestay.jpg" alt="Homestays" class="category-image">
-                        <div class="category-overlay">
-                            <div class="category-icon-wrapper">
-                                <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
-                                <h3 class="category-title">Homestays</h3>
-                            </div>
+                <article class="experience-card">
+                    <div class="experience-image">
+                        <img src="homestay.jpg" alt="Homestays">
+                        <div class="experience-badge">Featured</div>
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
                         </div>
+                        <h3 class="experience-title">Homestays</h3>
+                        <p class="experience-description">
+                            Stay with local families and experience Nepalese hospitality firsthand
+                        </p>
+                        <button class="experience-link">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="category-content">
-                        <p class="category-description">Stay with local families and experience Nepalese hospitality firsthand</p>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Category 3: Adventures -->
-                <div class="category-card">
-                    <div class="category-image-wrapper">
-                        <img src="images/adventure.jpg" alt="Adventures" class="category-image">
-                        <div class="category-overlay">
-                            <div class="category-icon-wrapper">
-                                <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M8.5 14.5L4 19l3 3 4.5-4.5"></path>
-                                    <path d="M14.5 8.5L19 4l3 3-4.5 4.5"></path>
-                                    <line x1="14.5" y1="8.5" x2="8.5" y2="14.5"></line>
-                                </svg>
-                                <h3 class="category-title">Adventures</h3>
-                            </div>
+                <article class="experience-card">
+                    <div class="experience-image">
+                        <img src="adventure.jpg" alt="Adventures">
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                            </svg>
                         </div>
+                        <h3 class="experience-title">Adventures</h3>
+                        <p class="experience-description">
+                            Trekking, rafting, and mountain expeditions led by experienced local operators
+                        </p>
+                        <button class="experience-link">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="category-content">
-                        <p class="category-description">Trekking, rafting, and mountain expeditions led by experienced local operators</p>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Category 4: Cultural Activities -->
-                <div class="category-card">
-                    <div class="category-image-wrapper">
-                        <img src="images/culture.jpg" alt="Cultural Activities" class="category-image">
-                        <div class="category-overlay">
-                            <div class="category-icon-wrapper">
-                                <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                                </svg>
-                                <h3 class="category-title">Cultural Activities</h3>
-                            </div>
+                <article class="experience-card">
+                    <div class="experience-image">
+                        <img src="cultural.jpg" alt="Cultural Activities">
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
                         </div>
+                        <h3 class="experience-title">Cultural Activities</h3>
+                        <p class="experience-description">
+                            Immerse yourself in traditional festivals, crafts, and authentic cultural experiences
+                        </p>
+                        <button class="experience-link">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="category-content">
-                        <p class="category-description">Immerse yourself in traditional festivals, crafts, and authentic cultural experiences</p>
-                    </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
@@ -160,57 +236,69 @@
     <!-- Mission Section -->
     <section class="mission" id="about">
         <div class="container">
-            <div class="mission-header">
-                <h2 class="section-title">Our Mission</h2>
-                <p class="mission-description">
-                    Nepal Local Connect empowers small tourism businesses while helping travelers 
-                    discover the authentic heart of Nepal. We believe in sustainable, community-based 
-                    tourism that benefits everyone.
-                </p>
-            </div>
-
-            <div class="values-grid">
-                <!-- Value 1 -->
-                <div class="value-card">
-                    <div class="value-icon-wrapper">
-                        <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                        </svg>
+            <div class="mission-content">
+                <div class="mission-text">
+                    <span class="section-label">Our Mission</span>
+                    <h2 class="section-title">Empowering Communities Through Sustainable Tourism</h2>
+                    <p class="mission-description">
+                        Nepal Local Connect bridges the gap between travelers seeking authentic experiences 
+                        and local communities offering genuine hospitality. We believe in sustainable, 
+                        community-based tourism that creates meaningful connections and supports local economies.
+                    </p>
+                    <div class="mission-values">
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <div class="value-text">
+                                <h3>Support Local</h3>
+                                <p>Every booking directly benefits small businesses and communities</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                </svg>
+                            </div>
+                            <div class="value-text">
+                                <h3>Sustainable Impact</h3>
+                                <p>Preserving Nepal's natural beauty and cultural heritage</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                            <div class="value-text">
+                                <h3>Authentic Connections</h3>
+                                <p>Building meaningful relationships with local hosts</p>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="value-title">Support Local</h3>
-                    <p class="value-description">Every booking directly supports small businesses and local communities across Nepal</p>
+                    <button class="btn btn-large btn-primary">Join Our Community</button>
                 </div>
-
-                <!-- Value 2 -->
-                <div class="value-card">
-                    <div class="value-icon-wrapper">
-                        <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
+                <div class="mission-visual">
+                    <div class="visual-card">
+                        <div class="visual-stat">
+                            <span class="visual-number">95%</span>
+                            <span class="visual-label">Traveler Satisfaction</span>
+                        </div>
                     </div>
-                    <h3 class="value-title">Authentic Connections</h3>
-                    <p class="value-description">Build meaningful relationships with local guides and families who call Nepal home</p>
-                </div>
-
-                <!-- Value 3 -->
-                <div class="value-card">
-                    <div class="value-icon-wrapper">
-                        <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M2 12h20"></path>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                        </svg>
+                    <div class="visual-card">
+                        <div class="visual-stat">
+                            <span class="visual-number">2000+</span>
+                            <span class="visual-label">Happy Travelers</span>
+                        </div>
                     </div>
-                    <h3 class="value-title">Sustainable Tourism</h3>
-                    <p class="value-description">Travel responsibly while preserving Nepal's natural beauty and cultural heritage</p>
                 </div>
-            </div>
-
-            <div class="mission-cta">
-                <button class="btn btn-primary btn-lg">Join Our Community</button>
             </div>
         </div>
     </section>
@@ -218,76 +306,74 @@
     <!-- Footer -->
     <footer class="footer" id="contact">
         <div class="container">
-            <div class="footer-grid">
-                <!-- Footer Column 1 -->
-                <div class="footer-column">
+            <div class="footer-main">
+                <div class="footer-brand">
                     <div class="footer-logo">
-                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 12h18M3 6h18M3 18h18"></path>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
                         </svg>
-                        <span class="logo-text">Nepal Local Connect</span>
+                        <span>Nepal Local Connect</span>
                     </div>
-                    <p class="footer-description">
+                    <p class="footer-tagline">
                         Connecting travelers with authentic local experiences in Nepal.
                     </p>
-                </div>
-
-                <!-- Footer Column 2 -->
-                <div class="footer-column">
-                    <h3 class="footer-heading">Explore</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Local Guides</a></li>
-                        <li><a href="#">Homestays</a></li>
-                        <li><a href="#">Adventures</a></li>
-                        <li><a href="#">Cultural Activities</a></li>
-                    </ul>
-                </div>
-
-                <!-- Footer Column 3 -->
-                <div class="footer-column">
-                    <h3 class="footer-heading">Company</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Our Mission</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Become a Partner</a></li>
-                    </ul>
-                </div>
-
-                <!-- Footer Column 4 -->
-                <div class="footer-column">
-                    <h3 class="footer-heading">Connect</h3>
-                    <div class="social-links">
-                        <a href="#" class="social-link">
+                    <div class="footer-social">
+                        <a href="#" class="social-btn" aria-label="Facebook">
                             <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                             </svg>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="#" class="social-btn" aria-label="Instagram">
                             <svg viewBox="0 0 24 24" fill="currentColor">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
                             </svg>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="#" class="social-btn" aria-label="Twitter">
                             <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
                             </svg>
                         </a>
                     </div>
-                    <p class="footer-email">nepallocalconnect@gmail.com</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="#">Local Guides</a></li>
+                            <li><a href="#">Homestays</a></li>
+                            <li><a href="#">Adventures</a></li>
+                            <li><a href="#">Cultural Activities</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Our Mission</a></li>
+                            <li><a href="#">Become a Partner</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:nepallocalconnect@gmail.com">nepallocalconnect@gmail.com</a></li>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>© 2025 Nepal Local Connect. All rights reserved.</p>
+                <p>&copy; 2025 Nepal Local Connect. All rights reserved.</p>
             </div>
         </div>
     </footer>
