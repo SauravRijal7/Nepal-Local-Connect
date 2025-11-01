@@ -42,6 +42,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 .sidebar a:hover,
@@ -97,7 +98,6 @@ button.logout-btn:hover {
   margin-bottom: 20px;
 }
 
-/* Form */
 form {
   display: flex;
   flex-direction: column;
@@ -105,6 +105,7 @@ form {
 }
 
 input[type="text"],
+input[type="file"],
 textarea {
   padding: 12px 15px;
   border: 1px solid #ccc;
@@ -127,6 +128,177 @@ button.publish-btn {
 button.publish-btn:hover { background: #1e40af; }
 
 .message { text-align: center; font-weight: 500; margin-top: 10px; }
+
+/* View sections */
+.view-section {
+  display: none;
+}
+
+.view-section.active {
+  display: block;
+}
+
+.no-business {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.business-info {
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.business-info p {
+  margin: 10px 0;
+  color: #444;
+}
+
+.business-info img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 15px;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.review-item {
+  padding: 15px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fafafa;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.rating-stars {
+  color: #f59e0b;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.no-reviews {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.edit-btn, .delete-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #1e40af;
+}
+
+.delete-btn {
+  background: #e53e3e;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c53030;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancel-btn {
+  background: #6b7280;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancel-btn:hover {
+  background: #4b5563;
+}
+
+.confirm-btn {
+  background: #e53e3e;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.confirm-btn:hover {
+  background: #c53030;
+}
+
+#edit-image-preview {
+  max-width: 200px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+.image-note {
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
 </style>
 </head>
 
@@ -134,10 +306,9 @@ button.publish-btn:hover { background: #1e40af; }
   <!-- Sidebar -->
   <div class="sidebar">
     <h2>Local Connect</h2>
-    <a href="#" class="active">📊 Dashboard</a>
-    <a href="#">➕ Add Business</a>
-    <a href="#">⭐ Reviews</a>
-    <a href="#">⚙️ Settings</a>
+    <a href="#" class="nav-link active" data-view="dashboard">📊 Dashboard</a>
+    <a href="#" class="nav-link" data-view="add-business">➕ Add Business</a>
+    <a href="#" class="nav-link" data-view="reviews">⭐ Reviews</a>
     <a href="#" id="logout">🚪 Logout</a>
   </div>
 
@@ -148,27 +319,89 @@ button.publish-btn:hover { background: #1e40af; }
       <button class="logout-btn" id="logout-btn">Logout</button>
     </div>
 
-    <div class="dashboard-card">
-      <h3>Add Your Business</h3>
-      <form id="business-form">
-        <input type="text" id="title" placeholder="Business Title" required>
-        <input type="text" id="type" placeholder="Business Type" required>
-        <input type="text" id="contact" placeholder="Contact Number" required>
-        <input type="file" id="businessImage" />
-        <textarea id="description" placeholder="Business Description" required></textarea>
-        <button type="submit" class="publish-btn">Publish</button>
+    <!-- Dashboard View -->
+    <div class="view-section active" id="dashboard-view">
+      <div class="dashboard-card">
+        <h3>Your Business Overview</h3>
+        <div id="dashboard-content">
+          <p class="no-business">Loading...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Business View -->
+    <div class="view-section" id="add-business-view">
+      <div class="dashboard-card">
+        <h3>Add Your Business</h3>
+        <div id="add-business-content">
+          <form id="business-form">
+            <input type="text" id="title" placeholder="Business Title" required>
+            <input type="text" id="type" placeholder="Business Type (e.g., Restaurant, Shop, Service)" required>
+            <input type="text" id="contact" placeholder="Contact Number" required>
+            <input type="file" id="businessImage" accept="image/*" />
+            <p class="image-note">📌 Recommended: Images under 500KB for best performance</p>
+            <textarea id="description" placeholder="Business Description" required></textarea>
+            <button type="submit" class="publish-btn">Publish Business</button>
+          </form>
+          <p id="msg" class="message"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews View -->
+    <div class="view-section" id="reviews-view">
+      <div class="dashboard-card">
+        <h3>User Ratings & Comments</h3>
+        <div id="reviews-content">
+          <p class="no-reviews">Loading reviews...</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal" id="edit-modal">
+    <div class="modal-content">
+      <h3>Edit Your Business</h3>
+      <form id="edit-form">
+        <input type="text" id="edit-title" placeholder="Business Title" required>
+        <input type="text" id="edit-type" placeholder="Business Type" required>
+        <input type="text" id="edit-contact" placeholder="Contact Number" required>
+        <textarea id="edit-description" placeholder="Business Description" required></textarea>
+        <input type="file" id="edit-image" accept="image/*" />
+        <p class="image-note">Leave empty to keep current image. Recommended: under 500KB</p>
+        <img id="edit-image-preview" style="display:none;" />
+        <div class="modal-buttons">
+          <button type="button" class="cancel-btn" id="cancel-edit">Cancel</button>
+          <button type="submit" class="publish-btn">Save Changes</button>
+        </div>
       </form>
-      <p id="msg" class="message"></p>
+      <p id="edit-msg" class="message"></p>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal" id="delete-modal">
+    <div class="modal-content">
+      <h3>Delete Business</h3>
+      <p>Are you sure you want to delete your business? This action cannot be undone.</p>
+      <div class="modal-buttons">
+        <button type="button" class="cancel-btn" id="cancel-delete">Cancel</button>
+        <button type="button" class="confirm-btn" id="confirm-delete">Delete</button>
+      </div>
+      <p id="delete-msg" class="message"></p>
     </div>
   </div>
 
 <script type="module">
-import { getStorage, ref, uploadBytes, getDownloadURL } 
-from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+import { 
+  getFirestore, doc, getDoc, collection, addDoc, 
+  query, where, getDocs, deleteDoc, updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // Firebase config
 const firebaseConfig = {
@@ -182,74 +415,329 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
-
+const db = getFirestore(app);
 
 const welcomeMsg = document.getElementById('welcome-msg');
 const businessForm = document.getElementById('business-form');
 const msg = document.getElementById('msg');
 const logoutBtn = document.getElementById('logout-btn');
 
-// Auth check
+let currentBusiness = null;
+let currentBusinessId = null;
+
+// Helper: Convert image to Base64
+function convertToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+    reader.readAsDataURL(file);
+  });
+}
+
+// Navigation functionality
+const navLinks = document.querySelectorAll('.nav-link');
+const viewSections = document.querySelectorAll('.view-section');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const viewName = link.getAttribute('data-view');
+    
+    // Update active nav link
+    navLinks.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    
+    // Show corresponding view
+    viewSections.forEach(section => section.classList.remove('active'));
+    document.getElementById(`${viewName}-view`).classList.add('active');
+  });
+});
+
+// 🔐 AUTH CHECK
 onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    const userDoc = await getDoc(doc(db, "users", user.uid));
-    if (!userDoc.exists() || userDoc.data().type !== "organization") {
-      alert("Access denied. Not an organization.");
-      window.location.href = "org_login.html";
-      return;
-    }
-    welcomeMsg.textContent = `Welcome, ${userDoc.data().name}`;
-  } else {
+  if (!user) {
     window.location.href = "org_login.html";
+    return;
+  }
+
+  const userDoc = await getDoc(doc(db, "users", user.uid));
+  if (!userDoc.exists() || userDoc.data().type !== "organization") {
+    alert("Access denied.");
+    window.location.href = "org_login.html";
+    return;
+  }
+
+  welcomeMsg.textContent = `Welcome, ${userDoc.data().name}`;
+
+  // ✅ CHECK IF BUSINESS ALREADY EXISTS
+  const qBiz = query(collection(db, "businesses"), where("ownerUid", "==", user.uid));
+  const bizSnap = await getDocs(qBiz);
+
+  if (!bizSnap.empty) {
+    currentBusiness = bizSnap.docs[0].data();
+    currentBusinessId = bizSnap.docs[0].id;
+    
+    loadDashboard();
+    loadReviews();
+    
+    // Hide add business form and show message
+    document.getElementById('add-business-content').innerHTML = `
+      <p style="text-align:center; color:#666; padding:40px;">
+        ✅ You have already published a business. View it in the Dashboard section.
+      </p>
+    `;
+  } else {
+    // No business yet
+    document.getElementById('dashboard-content').innerHTML = `
+      <p class="no-business">You haven't published a business yet. Click "Add Business" to get started.</p>
+    `;
+    document.getElementById('reviews-content').innerHTML = `
+      <p class="no-reviews">No reviews yet. Publish your business first to receive reviews.</p>
+    `;
   }
 });
 
-// Logout
+// Load Dashboard Content
+function loadDashboard() {
+  if (!currentBusiness) return;
+  
+  const html = `
+    <div class="business-info">
+      <p><strong>📌 Business Title:</strong> ${currentBusiness.title}</p>
+      <p><strong>🏢 Business Type:</strong> ${currentBusiness.type}</p>
+      <p><strong>📞 Contact:</strong> ${currentBusiness.contact}</p>
+      <p><strong>📝 Description:</strong> ${currentBusiness.description}</p>
+      <p><strong>⭐ Average Rating:</strong> ${currentBusiness.ratingAverage || 0}/5</p>
+      ${currentBusiness.businessurl ? `<img src="${currentBusiness.businessurl}" alt="Business Image" />` : ''}
+      <div class="action-buttons">
+        <button class="edit-btn" id="edit-business-btn">✏️ Edit Business</button>
+        <button class="delete-btn" id="delete-business-btn">🗑️ Delete Business</button>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('dashboard-content').innerHTML = html;
+  
+  // Attach event listeners
+  document.getElementById('edit-business-btn').addEventListener('click', openEditModal);
+  document.getElementById('delete-business-btn').addEventListener('click', openDeleteModal);
+}
+
+// Load Reviews
+async function loadReviews() {
+  if (!currentBusinessId) return;
+  
+  const reviewQuery = query(collection(db, "reviews"), where("businessId", "==", currentBusinessId));
+  const reviewSnap = await getDocs(reviewQuery);
+
+  if (reviewSnap.empty) {
+    document.getElementById('reviews-content').innerHTML = `
+      <p class="no-reviews">No reviews yet. Users will be able to review your business once it's published.</p>
+    `;
+    return;
+  }
+
+  let output = "";
+  reviewSnap.forEach(r => {
+    const data = r.data();
+    const stars = "⭐".repeat(data.rating) + "☆".repeat(5 - data.rating);
+    output += `
+      <div class="review-item">
+        <div class="rating-stars">${stars} (${data.rating}/5)</div>
+        <p style="color:#555; margin:5px 0;">${data.comment}</p>
+      </div>
+    `;
+  });
+
+  document.getElementById('reviews-content').innerHTML = output;
+}
+
+// ✅ LOGOUT
 logoutBtn.addEventListener("click", async () => {
   await signOut(auth);
   window.location.href = "org_login.html";
 });
 
-// Handle submit
+document.getElementById('logout').addEventListener("click", async (e) => {
+  e.preventDefault();
+  await signOut(auth);
+  window.location.href = "org_login.html";
+});
+
+// ✅ SUBMIT BUSINESS
 businessForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  
-  const title = document.getElementById('title').value;
-  const type = document.getElementById('type').value;
-  const contact = document.getElementById('contact').value;
-  const description = document.getElementById('description').value;
+
+  const title = document.getElementById('title').value.trim();
+  const type = document.getElementById('type').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  const description = document.getElementById('description').value.trim();
   const file = document.getElementById('businessImage').files[0];
 
   try {
     const user = auth.currentUser;
-     let imageUrl = "";
 
-    // ✅ Upload image (if selected)
-    if (file) {
-      const storageRef = ref(storage, "businessImages/" + Date.now() + "_" + file.name);
-      await uploadBytes(storageRef, file);
-      imageUrl = await getDownloadURL(storageRef);
+    // ✅ Check if user already posted business
+    const q = query(collection(db, "businesses"), where("ownerUid", "==", user.uid));
+    const snap = await getDocs(q);
+
+    if (!snap.empty) {
+      msg.style.color = "red";
+      msg.textContent = "❌ You can only publish one business.";
+      return;
     }
+
+    let imageBase64 = "";
+
+    // ✅ Convert image to Base64 if selected
+    if (file) {
+      msg.textContent = "Processing image...";
+      msg.style.color = "#2563eb";
+      
+      // Validate file size (max 1MB for Base64)
+      if (file.size > 1 * 1024 * 1024) {
+        throw new Error("Image size must be less than 1MB");
+      }
+      
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        throw new Error("Please select a valid image file");
+      }
+      
+      imageBase64 = await convertToBase64(file);
+      console.log("Image converted to Base64");
+    }
+
+    msg.textContent = "Publishing business...";
+
     await addDoc(collection(db, "businesses"), {
       ownerUid: user.uid,
       title,
       type,
       contact,
       description,
-      businessurl: imageurl,
+      businessurl: imageBase64,
       createdAt: new Date(),
       ratingAverage: 0
-
     });
 
     msg.style.color = "green";
-    msg.textContent = "✅ Business published successfully!";
+    msg.textContent = "✅ Business published successfully! Redirecting...";
     businessForm.reset();
+    setTimeout(() => location.reload(), 1500);
+
   } catch (err) {
+    console.error("Submit error:", err);
     msg.style.color = "red";
-    msg.textContent = err.message;
+    msg.textContent = "❌ Error: " + err.message;
+  }
+});
+
+// Edit Modal Functions
+function openEditModal() {
+  document.getElementById('edit-title').value = currentBusiness.title;
+  document.getElementById('edit-type').value = currentBusiness.type;
+  document.getElementById('edit-contact').value = currentBusiness.contact;
+  document.getElementById('edit-description').value = currentBusiness.description;
+  
+  if (currentBusiness.businessurl) {
+    document.getElementById('edit-image-preview').src = currentBusiness.businessurl;
+    document.getElementById('edit-image-preview').style.display = 'block';
+  }
+  
+  document.getElementById('edit-modal').classList.add('active');
+}
+
+document.getElementById('cancel-edit').addEventListener('click', () => {
+  document.getElementById('edit-modal').classList.remove('active');
+  document.getElementById('edit-msg').textContent = '';
+});
+
+document.getElementById('edit-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const editMsg = document.getElementById('edit-msg');
+  const title = document.getElementById('edit-title').value.trim();
+  const type = document.getElementById('edit-type').value.trim();
+  const contact = document.getElementById('edit-contact').value.trim();
+  const description = document.getElementById('edit-description').value.trim();
+  const file = document.getElementById('edit-image').files[0];
+  
+  try {
+    let imageBase64 = currentBusiness.businessurl || "";
+    
+    // Convert new image if selected
+    if (file) {
+      editMsg.textContent = "Processing new image...";
+      editMsg.style.color = "#2563eb";
+      
+      // Validate file size (max 1MB)
+      if (file.size > 1 * 1024 * 1024) {
+        throw new Error("Image size must be less than 1MB");
+      }
+      
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        throw new Error("Please select a valid image file");
+      }
+      
+      imageBase64 = await convertToBase64(file);
+      console.log("New image converted to Base64");
+    }
+    
+    editMsg.textContent = "Updating business details...";
+    
+    // Update Firestore document
+    await updateDoc(doc(db, "businesses", currentBusinessId), {
+      title,
+      type,
+      contact,
+      description,
+      businessurl: imageBase64,
+      updatedAt: new Date()
+    });
+    
+    editMsg.style.color = "green";
+    editMsg.textContent = "✅ Business updated successfully! Refreshing...";
+    
+    setTimeout(() => location.reload(), 1500);
+    
+  } catch (err) {
+    console.error("Edit form error:", err);
+    editMsg.style.color = "red";
+    editMsg.textContent = "❌ Error: " + err.message;
+  }
+});
+
+// Delete Modal Functions
+function openDeleteModal() {
+  document.getElementById('delete-modal').classList.add('active');
+}
+
+document.getElementById('cancel-delete').addEventListener('click', () => {
+  document.getElementById('delete-modal').classList.remove('active');
+  document.getElementById('delete-msg').textContent = '';
+});
+
+document.getElementById('confirm-delete').addEventListener('click', async () => {
+  const deleteMsg = document.getElementById('delete-msg');
+  
+  try {
+    deleteMsg.textContent = "Deleting business...";
+    deleteMsg.style.color = "#2563eb";
+    
+    // Delete the business document
+    await deleteDoc(doc(db, "businesses", currentBusinessId));
+    
+    deleteMsg.style.color = "green";
+    deleteMsg.textContent = "✅ Business deleted successfully! Redirecting...";
+    
+    setTimeout(() => location.reload(), 1500);
+    
+  } catch (err) {
+    deleteMsg.style.color = "red";
+    deleteMsg.textContent = "❌ Error: " + err.message;
   }
 });
 </script>

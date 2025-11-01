@@ -5,29 +5,18 @@ businessForm.addEventListener('submit', async (e) => {
   const type = document.getElementById('type').value;
   const contact = document.getElementById('contact').value;
   const description = document.getElementById('description').value;
-  const file = document.getElementById('businessImage').files[0];
+  const location = document.getElementById('location').value;
 
   try {
     const user = auth.currentUser;
 
-    let imageUrl = "";
-
-    // ✅ Upload image if selected
-    if (file) {
-      const storage = getStorage();
-      const storageRef = ref(storage, "businessImages/" + file.name);
-      await uploadBytes(storageRef, file);
-      imageUrl = await getDownloadURL(storageRef);
-    }
-
-    // ✅ Save to Firestore with the REAL image URL
     await addDoc(collection(db, "businesses"), {
       ownerUid: user.uid,
       title,
       type,
       contact,
       description,
-      businessurl: imageUrl,  // ✅ correct URL
+      location,
       createdAt: new Date(),
       ratingAverage: 0
     });
