@@ -409,17 +409,6 @@ h1 {
       </select>
     </label>
 
-    <label>Location:
-      <select id="locationFilter">
-        <option value="">All</option>
-        <option value="Kathmandu">Kathmandu</option>
-        <option value="Pokhara">Pokhara</option>
-        <option value="Thamel">Thamel</option>
-        <option value="Chitwan">Chitwan</option>
-        <option value="Everest">Everest</option>
-      </select>
-    </label>
-
     <label>Sort By:
       <select id="sortFilter">
         <option value="popular">Most Popular</option>
@@ -457,7 +446,6 @@ const businessGrid = document.getElementById('business-grid');
 const msg = document.getElementById('msg');
 
 const typeFilter = document.getElementById('typeFilter');
-const locationFilter = document.getElementById('locationFilter');
 const sortFilter = document.getElementById('sortFilter');
 const applyFiltersBtn = document.getElementById('applyFilters');
 
@@ -628,7 +616,6 @@ function showMessage(text, type = 'success') {
 // Apply filters and sorting
 applyFiltersBtn.addEventListener('click', () => {
   const typeVal = typeFilter.value;
-  const locVal = locationFilter.value;
   const sortVal = sortFilter.value;
 
   let filtered = allBusinesses.filter(b => 
