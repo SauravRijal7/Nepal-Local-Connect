@@ -105,11 +105,7 @@ body {
 
 .container {
   max-width: 1200px;
-<<<<<<< HEAD
   margin: 50px auto;
-=======
-  margin: 40px auto;
->>>>>>> test
   padding: 0 20px;
 }
 
@@ -200,7 +196,6 @@ h1 {
   width: 100%;
   height: 200px;
   object-fit: cover;
-<<<<<<< HEAD
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -231,26 +226,6 @@ h1 {
   margin: 6px 0;
   color: #4b5563;
   line-height: 1.6;
-=======
-  background: #e5e7eb;
-}
-
-.card-content {
-  padding: 20px;
-}
-
-.card-content h3 {
-  margin: 0 0 10px 0;
-  font-size: 20px;
-  color: #111;
-}
-
-.card-content p {
-  margin: 8px 0;
-  color: #555;
-  font-size: 14px;
-  line-height: 1.5;
->>>>>>> test
 }
 
 /* Like/Dislike Actions */
@@ -266,7 +241,6 @@ h1 {
 .action-btn {
   display: flex;
   align-items: center;
-<<<<<<< HEAD
   gap: 6px;
   padding: 8px 16px;
   border-radius: 20px;
@@ -282,33 +256,6 @@ h1 {
 .action-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-=======
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #e5e7eb;
-}
-
-.star {
-  font-size: 22px;
-  color: #d1d5db;
-  cursor: pointer;
-  margin-right: 3px;
-  transition: color 0.2s;
-}
-
-.star.selected {
-  color: #facc15;
-}
-
-.star:hover {
-  color: #fbbf24;
-}
-
-.rating-text {
-  margin-left: 10px;
-  font-size: 14px;
-  color: #666;
->>>>>>> test
 }
 
 .action-btn.disabled {
@@ -370,7 +317,6 @@ h1 {
 /* Message */
 .message {
   text-align: center;
-<<<<<<< HEAD
   margin-top: 25px;
   font-size: 16px;
   font-weight: 500;
@@ -417,29 +363,6 @@ h1 {
   .actions {
     flex-wrap: wrap;
   }
-=======
-  color: green;
-  margin-top: 20px;
-  font-weight: 500;
-  font-size: 16px;
-}
-
-.no-image {
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 48px;
-}
-
-.loading {
-  text-align: center;
-  padding: 40px;
-  color: #666;
->>>>>>> test
 }
 </style>
 </head>
@@ -532,7 +455,6 @@ const db = getFirestore(app);
 const businessGrid = document.getElementById('business-grid');
 const msg = document.getElementById('msg');
 
-<<<<<<< HEAD
 const typeFilter = document.getElementById('typeFilter');
 const locationFilter = document.getElementById('locationFilter');
 const sortFilter = document.getElementById('sortFilter');
@@ -735,92 +657,6 @@ applyFiltersBtn.addEventListener('click', () => {
   }
 });
 fetchBusinesses();
-=======
-// Fetch all businesses
-async function loadBusinesses() {
-  try {
-    const querySnapshot = await getDocs(collection(db, "businesses"));
-    
-    if (querySnapshot.empty) {
-      businessGrid.innerHTML = "<p class='loading'>No businesses found yet.</p>";
-      return;
-    }
-    
-    businessGrid.innerHTML = "";
-    
-    querySnapshot.forEach(docSnap => {
-      const data = docSnap.data();
-      const card = document.createElement('div');
-      card.className = "business-card";
-      
-      // Get the correct image URL field (businessurl from your dashboard)
-      const imageHTML = data.businessurl 
-        ? `<img src="${data.businessurl}" alt="${data.title}" />` 
-        : `<div class="no-image">🏢</div>`;
-      
-      card.innerHTML = `
-        ${imageHTML}
-        <div class="card-content">
-          <h3>${data.title || "Untitled Business"}</h3>
-          <p><strong>Type:</strong> ${data.type || "N/A"}</p>
-          <p><strong>Contact:</strong> ${data.contact || "N/A"}</p>
-          <p><strong>Description:</strong> ${data.description || "No description provided"}</p>
-          
-          <div class="rating" data-id="${docSnap.id}">
-            ${renderStars(data.ratingAverage || 0)}
-            <span class="rating-text">${(data.ratingAverage || 0).toFixed(1)}/5</span>
-          </div>
-        </div>
-      `;
-      
-      businessGrid.appendChild(card);
-
-      // Add click event for rating
-      const stars = card.querySelectorAll('.star');
-      stars.forEach((star, index) => {
-        star.addEventListener('click', async () => {
-          const newRating = index + 1;
-          try {
-            // Update the rating in Firebase
-            await updateDoc(doc(db, "businesses", docSnap.id), { 
-              ratingAverage: newRating 
-            });
-            
-            msg.textContent = `✅ You rated ${data.title} ${newRating} star(s)!`;
-            msg.style.color = "green";
-            
-            // Refresh the display
-            setTimeout(() => {
-              msg.textContent = "";
-              loadBusinesses();
-            }, 2000);
-            
-          } catch (err) {
-            msg.textContent = `❌ Error: ${err.message}`;
-            msg.style.color = "red";
-          }
-        });
-      });
-    });
-  } catch (error) {
-    businessGrid.innerHTML = `<p class='loading' style='color:red;'>Error loading businesses: ${error.message}</p>`;
-  }
-}
-
-// Helper: render stars HTML
-function renderStars(rating) {
-  let html = '';
-  const fullStars = Math.floor(rating);
-  
-  for(let i = 1; i <= 5; i++) {
-    html += `<span class="star ${i <= fullStars ? 'selected' : ''}">★</span>`;
-  }
-  return html;
-}
-
-// Load businesses on page load
-loadBusinesses();
->>>>>>> test
 </script>
 </body>
 </html>
