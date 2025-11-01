@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
 }
@@ -27,8 +27,8 @@ h1 {
 
 .business-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
 }
 
 .business-card {
@@ -45,50 +45,81 @@ h1 {
 
 .business-card img {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
+  background: #e5e7eb;
 }
 
 .card-content {
-  padding: 15px 20px;
+  padding: 20px;
 }
 
 .card-content h3 {
-  margin: 0;
-  font-size: 18px;
+  margin: 0 0 10px 0;
+  font-size: 20px;
   color: #111;
 }
 
 .card-content p {
-  margin: 5px 0;
+  margin: 8px 0;
   color: #555;
   font-size: 14px;
+  line-height: 1.5;
 }
 
 .rating {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e5e7eb;
 }
 
 .star {
-  font-size: 20px;
-  color: #ccc;
+  font-size: 22px;
+  color: #d1d5db;
   cursor: pointer;
-  margin-right: 5px;
+  margin-right: 3px;
+  transition: color 0.2s;
 }
 
-.star.selected,
-.star:hover,
-.star:hover ~ .star {
-  color: #facc15; /* yellow */
+.star.selected {
+  color: #facc15;
+}
+
+.star:hover {
+  color: #fbbf24;
+}
+
+.rating-text {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #666;
 }
 
 .message {
   text-align: center;
   color: green;
-  margin-top: 10px;
+  margin-top: 20px;
   font-weight: 500;
+  font-size: 16px;
+}
+
+.no-image {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 48px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
 }
 </style>
 </head>
@@ -96,7 +127,7 @@ h1 {
 <div class="container">
   <h1>Our Partners</h1>
   <div class="business-grid" id="business-grid">
-    <!-- Business cards will be injected here -->
+    <p class="loading">Loading businesses...</p>
   </div>
   <p id="msg" class="message"></p>
 </div>
@@ -123,50 +154,87 @@ const msg = document.getElementById('msg');
 
 // Fetch all businesses
 async function loadBusinesses() {
-  const querySnapshot = await getDocs(collection(db, "businesses"));
-  businessGrid.innerHTML = "";
-  querySnapshot.forEach(docSnap => {
-    const data = docSnap.data();
-    const card = document.createElement('div');
-    card.className = "business-card";
-    card.innerHTML = `
-     <div class="card-content">
-  <h3>${data.title}</h3>
-  <img src="${data.imageUrl || 'default.png'}" class="card-img" />
+  try {
+    const querySnapshot = await getDocs(collection(db, "businesses"));
+    
+    if (querySnapshot.empty) {
+      businessGrid.innerHTML = "<p class='loading'>No businesses found yet.</p>";
+      return;
+    }
+    
+    businessGrid.innerHTML = "";
+    
+    querySnapshot.forEach(docSnap => {
+      const data = docSnap.data();
+      const card = document.createElement('div');
+      card.className = "business-card";
+      
+      // Get the correct image URL field (businessurl from your dashboard)
+      const imageHTML = data.businessurl 
+        ? `<img src="${data.businessurl}" alt="${data.title}" />` 
+        : `<div class="no-image">🏢</div>`;
+      
+      card.innerHTML = `
+        ${imageHTML}
+        <div class="card-content">
+          <h3>${data.title || "Untitled Business"}</h3>
+          <p><strong>Type:</strong> ${data.type || "N/A"}</p>
+          <p><strong>Contact:</strong> ${data.contact || "N/A"}</p>
+          <p><strong>Description:</strong> ${data.description || "No description provided"}</p>
+          
+          <div class="rating" data-id="${docSnap.id}">
+            ${renderStars(data.ratingAverage || 0)}
+            <span class="rating-text">${(data.ratingAverage || 0).toFixed(1)}/5</span>
+          </div>
+        </div>
+      `;
+      
+      businessGrid.appendChild(card);
 
-  <p><strong>Description:</strong> ${data.description || "-"}</p>
-  <p><strong>Type:</strong> ${data.type || "-"}</p>
-  <p><strong>Contact:</strong> ${data.contact || "-"}</p>
-
-  <div class="rating" data-id="${docSnap.id}">
-    ${renderStars(data.ratingAverage || 0)}
-  </div>
-</div>
-
-    `;
-    businessGrid.appendChild(card);
-
-    // Add click event for rating
-    const stars = card.querySelectorAll('.star');
-    stars.forEach((star, index) => {
-      star.addEventListener('click', async () => {
-        await updateDoc(doc(db, "businesses", docSnap.id), { Rating: index + 1 });
-        msg.textContent = `You rated ${data.Name} ${index+1} star(s)!`;
-        loadBusinesses(); // Refresh stars
+      // Add click event for rating
+      const stars = card.querySelectorAll('.star');
+      stars.forEach((star, index) => {
+        star.addEventListener('click', async () => {
+          const newRating = index + 1;
+          try {
+            // Update the rating in Firebase
+            await updateDoc(doc(db, "businesses", docSnap.id), { 
+              ratingAverage: newRating 
+            });
+            
+            msg.textContent = `✅ You rated ${data.title} ${newRating} star(s)!`;
+            msg.style.color = "green";
+            
+            // Refresh the display
+            setTimeout(() => {
+              msg.textContent = "";
+              loadBusinesses();
+            }, 2000);
+            
+          } catch (err) {
+            msg.textContent = `❌ Error: ${err.message}`;
+            msg.style.color = "red";
+          }
+        });
       });
     });
-  });
+  } catch (error) {
+    businessGrid.innerHTML = `<p class='loading' style='color:red;'>Error loading businesses: ${error.message}</p>`;
+  }
 }
 
 // Helper: render stars HTML
 function renderStars(rating) {
   let html = '';
-  for(let i=1; i<=5; i++){
-    html += `<span class="star ${i <= rating ? 'selected' : ''}">&#9733;</span>`;
+  const fullStars = Math.floor(rating);
+  
+  for(let i = 1; i <= 5; i++) {
+    html += `<span class="star ${i <= fullStars ? 'selected' : ''}">★</span>`;
   }
   return html;
 }
 
+// Load businesses on page load
 loadBusinesses();
 </script>
 </body>
