@@ -403,9 +403,8 @@ h1 {
         <option value="Restaurant">Restaurant</option>
         <option value="Shop">Shop</option>
         <option value="Hotel">Hotel</option>
-        <option value="Adventure">Adventure</option>
+        <option value="Cafe">Cafe</option>
         <option value="Service">Service</option>
-
       </select>
     </label>
 
@@ -619,9 +618,7 @@ applyFiltersBtn.addEventListener('click', () => {
   const sortVal = sortFilter.value;
 
   let filtered = allBusinesses.filter(b => 
-    (typeVal === "" || b.type === typeVal) &&
-    (locVal === "" || b.location === locVal)
-  );
+    (typeVal === "" || b.type === typeVal));
   
   // Apply sorting
   if (sortVal === 'popular') {

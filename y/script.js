@@ -5,6 +5,467 @@
 'use strict';
 
 // ===================================
+// EXPERIENCE POPUP MODALS
+// ===================================
+
+const experienceData = {
+    guides: {
+        title: "Local Guides",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>`,
+        description: "Connect with experienced local guides who know Nepal's hidden treasures and cultural stories that guidebooks miss.",
+        features: [
+            "Licensed and certified guides",
+            "Fluent in English, Nepali, and regional languages",
+            "Expert knowledge of trekking routes and cultural sites",
+            "Personalized itineraries based on your interests",
+            "Deep understanding of local customs and traditions"
+        ],
+        services: [
+            { name: "Kathmandu Valley Tours", desc: "UNESCO World Heritage Sites exploration" },
+            { name: "Trekking Guides", desc: "Everest, Annapurna, Langtang routes" },
+            { name: "Cultural Tours", desc: "Temple visits, local festivals, traditional crafts" },
+            { name: "Adventure Support", desc: "Mountain climbing, paragliding assistance" }
+        ],
+        stats: { guides: "500+", languages: "15+", regions: "75+" }
+    },
+    homestays: {
+        title: "Homestays",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>`,
+        description: "Experience authentic Nepalese hospitality by staying with local families in traditional homes across Nepal's diverse regions.",
+        features: [
+            "Clean, comfortable traditional accommodations",
+            "Home-cooked authentic Nepalese meals (Dal Bhat, Momos)",
+            "Cultural immersion and language practice",
+            "Family-style warm hospitality",
+            "Safe and verified host families"
+        ],
+        services: [
+            { name: "Village Homestays", desc: "Rural mountain village experiences" },
+            { name: "Kathmandu Homestays", desc: "City life with local families" },
+            { name: "Farm Stays", desc: "Agricultural life in terraced fields" },
+            { name: "Cultural Homestays", desc: "Newari, Tamang, Sherpa communities" }
+        ],
+        stats: { homestays: "200+", villages: "50+", families: "300+" }
+    },
+    adventures: {
+        title: "Adventures",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>`,
+        description: "Embark on thrilling adventures led by experienced local operators who prioritize safety and environmental responsibility.",
+        features: [
+            "Professional, safety-certified operators",
+            "High-quality equipment and gear",
+            "Small group sizes for personalized experience",
+            "Eco-friendly and sustainable practices",
+            "Emergency evacuation and insurance support"
+        ],
+        services: [
+            { name: "Trekking Expeditions", desc: "Everest Base Camp, Annapurna Circuit, Manaslu" },
+            { name: "White Water Rafting", desc: "Trishuli, Bhote Koshi, Sun Koshi rivers" },
+            { name: "Paragliding", desc: "Pokhara lakeside flights with mountain views" },
+            { name: "Mountain Climbing", desc: "Peak climbing: Island Peak, Mera Peak, Lobuche" }
+        ],
+        stats: { routes: "100+", operators: "75+", adventures: "1000+" }
+    },
+    culture: {
+        title: "Cultural Activities",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>`,
+        description: "Immerse yourself in Nepal's rich cultural heritage through traditional festivals, crafts, music, and spiritual experiences.",
+        features: [
+            "Authentic cultural workshops and classes",
+            "Participation in local festivals and ceremonies",
+            "Traditional craft learning experiences",
+            "Buddhist meditation and yoga sessions",
+            "Local music and dance performances"
+        ],
+        services: [
+            { name: "Cooking Classes", desc: "Learn to prepare Dal Bhat, Momos, Sel Roti" },
+            { name: "Craft Workshops", desc: "Pottery, Thangka painting, woodcarving" },
+            { name: "Temple Ceremonies", desc: "Morning pujas, evening aarti participation" },
+            { name: "Festival Experiences", desc: "Dashain, Tihar, Holi celebrations" }
+        ],
+        stats: { activities: "150+", festivals: "30+", workshops: "50+" }
+    }
+};
+
+const createPopupHTML = (data) => {
+    return `
+        <div class="popup-overlay" onclick="closePopup(event)">
+            <div class="popup-content" onclick="event.stopPropagation()">
+                <button class="popup-close" onclick="closePopup(event)" aria-label="Close">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                
+                <div class="popup-header">
+                    <div class="popup-icon">${data.icon}</div>
+                    <h2 class="popup-title">${data.title}</h2>
+                </div>
+                
+                <p class="popup-description">${data.description}</p>
+                
+                <div class="popup-section">
+                    <h3 class="popup-section-title">What We Offer</h3>
+                    <ul class="popup-features">
+                        ${data.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="popup-section">
+                    <h3 class="popup-section-title">Popular Services</h3>
+                    <div class="popup-services">
+                        ${data.services.map(service => `
+                            <div class="popup-service-card">
+                                <h4>${service.name}</h4>
+                                <p>${service.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="popup-stats">
+                    ${Object.entries(data.stats).map(([key, value]) => `
+                        <div class="popup-stat">
+                            <span class="popup-stat-number">${value}</span>
+                            <span class="popup-stat-label">${key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="popup-actions">
+                    <button class="btn btn-primary btn-large" onclick="closePopup(event)">Book Now</button>
+                    <button class="btn btn-outline btn-large" onclick="closePopup(event)">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    `;
+};
+
+const openPopup = (type) => {
+    const data = experienceData[type];
+    if (!data) return;
+    
+    const popup = document.createElement('div');
+    popup.className = 'popup-modal';
+    popup.innerHTML = createPopupHTML(data);
+    document.body.appendChild(popup);
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+    
+    // Animate in
+    setTimeout(() => popup.classList.add('active'), 10);
+};
+
+const closePopup = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const popup = document.querySelector('.popup-modal');
+    if (popup) {
+        popup.classList.remove('active');
+        setTimeout(() => {
+            popup.remove();
+            document.body.style.overflow = '';
+        }, 300);
+    }
+};
+
+// Add popup styles
+const popupStyles = document.createElement('style');
+popupStyles.textContent = `
+    .popup-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .popup-modal.active {
+        opacity: 1;
+    }
+    
+    .popup-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        overflow-y: auto;
+    }
+    
+    .popup-content {
+        background: white;
+        border-radius: 24px;
+        max-width: 800px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 2.5rem;
+        position: relative;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    }
+    
+    .popup-modal.active .popup-content {
+        transform: scale(1);
+    }
+    
+    .popup-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background: var(--bg-secondary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        z-index: 10;
+    }
+    
+    .popup-close:hover {
+        background: var(--primary);
+        transform: rotate(90deg);
+    }
+    
+    .popup-close svg {
+        width: 20px;
+        height: 20px;
+        color: var(--text-primary);
+    }
+    
+    .popup-close:hover svg {
+        color: white;
+    }
+    
+    .popup-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .popup-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-accent);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .popup-icon svg {
+        width: 32px;
+        height: 32px;
+        color: white;
+    }
+    
+    .popup-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin: 0;
+    }
+    
+    .popup-description {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+    }
+    
+    .popup-section {
+        margin-bottom: 2rem;
+    }
+    
+    .popup-section-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+    }
+    
+    .popup-features {
+        list-style: none;
+        display: grid;
+        gap: 0.75rem;
+    }
+    
+    .popup-features li {
+        padding-left: 2rem;
+        position: relative;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+    
+    .popup-features li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+    
+    .popup-services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+    
+    .popup-service-card {
+        padding: 1.25rem;
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        transition: var(--transition);
+    }
+    
+    .popup-service-card:hover {
+        background: white;
+        box-shadow: var(--shadow-md);
+        transform: translateY(-4px);
+    }
+    
+    .popup-service-card h4 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+    
+    .popup-service-card p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        margin: 0;
+    }
+    
+    .popup-stats {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        padding: 1.5rem;
+        background: var(--bg-secondary);
+        border-radius: 16px;
+        margin-bottom: 2rem;
+    }
+    
+    .popup-stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .popup-stat-number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary);
+    }
+    
+    .popup-stat-label {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        text-transform: capitalize;
+    }
+    
+    .popup-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .popup-actions .btn {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    @media (max-width: 768px) {
+        .popup-content {
+            padding: 2rem 1.5rem;
+            max-height: 95vh;
+        }
+        
+        .popup-title {
+            font-size: 1.5rem;
+        }
+        
+        .popup-description {
+            font-size: 1rem;
+        }
+        
+        .popup-services {
+            grid-template-columns: 1fr;
+        }
+        
+        .popup-stats {
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .popup-stat {
+            flex: 1 1 45%;
+        }
+        
+        .popup-actions {
+            flex-direction: column;
+        }
+        
+        .popup-actions .btn {
+            width: 100%;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .popup-content {
+            padding: 1.5rem 1rem;
+        }
+        
+        .popup-close {
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+        }
+        
+        .popup-icon {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .popup-icon svg {
+            width: 26px;
+            height: 26px;
+        }
+    }
+`;
+document.head.appendChild(popupStyles);
+
+// ===================================
 // MOBILE NAVIGATION
 // ===================================
 
@@ -369,9 +830,6 @@ const createScrollTopButton = () => {
         });
     });
 };
-document.getElementById("exploreNow").addEventListener("click", () => {
-    document.getElementById("experiences").scrollIntoView({ behavior: "smooth" });
-});
 
 // Add scroll to top button styles
 const scrollTopStyle = document.createElement('style');

@@ -1,5 +1,4 @@
 const typeFilter = document.getElementById('typeFilter');
-const locationFilter = document.getElementById('locationFilter');
 const ratingFilter = document.getElementById('ratingFilter');
 const applyFiltersBtn = document.getElementById('applyFilters');
 
@@ -25,7 +24,6 @@ function renderBusinesses(dataArray) {
         <p><strong>Description:</strong> ${data.description || "-"}</p>
         <p><strong>Type:</strong> ${data.type || "-"}</p>
         <p><strong>Contact:</strong> ${data.contact || "-"}</p>
-        <p><strong>Location:</strong> ${data.location || "-"}</p>
         <div class="rating" data-id="${data.id}">
           ${renderStars(data.ratingAverage || 0)}
         </div>
@@ -48,13 +46,11 @@ function renderBusinesses(dataArray) {
 // filter logic
 applyFiltersBtn.addEventListener('click', () => {
   const typeVal = typeFilter.value;
-  const locVal = locationFilter.value;
   const ratingVal = parseInt(ratingFilter.value);
 
   const filtered = allBusinesses.filter(b => {
     return (
       (typeVal === "" || b.type === typeVal) &&
-      (locVal === "" || b.location === locVal) &&
       (b.ratingAverage || 0) >= ratingVal
     );
   });
