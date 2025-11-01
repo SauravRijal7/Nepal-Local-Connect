@@ -50,6 +50,18 @@
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .image-section {
@@ -89,7 +101,8 @@
         }
 
         .logo img {
-            height: 280px;
+            max-width: 100%;
+            height: auto;
             filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
         }
 
@@ -168,6 +181,7 @@
             transition: all 0.3s ease;
             background: var(--bg-secondary);
             color: var(--text-primary);
+            font-family: inherit;
         }
 
         input:focus {
@@ -181,7 +195,7 @@
             color: var(--text-light);
         }
 
-        button {
+        button[type="submit"] {
             width: 100%;
             padding: 16px;
             border: none;
@@ -194,15 +208,22 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
             margin-top: 10px;
+            font-family: inherit;
         }
 
-        button:hover {
+        button[type="submit"]:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
         }
 
-        button:active {
+        button[type="submit"]:active {
             transform: translateY(0);
+        }
+
+        button[type="submit"]:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .form-footer {
@@ -227,7 +248,7 @@
         .message {
             font-size: 14px;
             margin-top: 15px;
-            padding: 12px;
+            padding: 12px 16px;
             border-radius: 8px;
             text-align: center;
             font-weight: 600;
@@ -235,15 +256,55 @@
         }
 
         .message.success {
+            display: block;
             background: #d1fae5;
             color: #065f46;
-            display: block;
+            border: 1px solid #86efac;
+            animation: slideIn 0.3s ease-out;
         }
 
         .message.error {
+            display: block;
             background: #fee2e2;
             color: #991b1b;
-            display: block;
+            border: 1px solid #fca5a5;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .return-btn-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .return-btn {
+            display: inline-block;
+            text-align: center;
+            padding: 12px 32px;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .return-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(243, 156, 18, 0.05);
         }
 
         .decorative-elements {
@@ -282,11 +343,27 @@
             50% { transform: scale(1.1); opacity: 0.3; }
         }
 
+        .password-requirements {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        .password-requirements ul {
+            margin: 5px 0 0 20px;
+            padding: 0;
+        }
+
+        .password-requirements li {
+            margin: 2px 0;
+        }
+
         /* Responsive */
         @media (max-width: 968px) {
             .register-wrapper {
                 grid-template-columns: 1fr;
-                max-width: 450px;
+                max-width: 500px;
             }
 
             .image-section {
@@ -299,6 +376,10 @@
         }
 
         @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
             .form-section {
                 padding: 30px 20px;
             }
@@ -306,36 +387,15 @@
             .form-header h2 {
                 font-size: 26px;
             }
+
+            input {
+                padding: 12px 16px;
+            }
+
+            button[type="submit"] {
+                padding: 14px;
+            }
         }
-         
-.return-btn {
-    display: inline-block;
-    text-align: center;
-    width: 20%;
-    padding: 16px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-light));
-    color: white;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
-}
-
-.return-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
-}
-
-.return-btn:active {
-    transform: translateY(0);
-}
-.return-btn-container {
-    text-align: center;
-    margin-top: 15px;
-}
-
     </style>
 </head>
 <body>
@@ -348,7 +408,7 @@
             </div>
             <div class="image-content">
                 <div class="logo">
-<img src="logo.png" style="height: 350px;" alt="Nepal Local Connect Logo">
+                    <img src="logo.png" style="height: 350px;" alt="Nepal Local Connect Logo">
                 </div>
                 <h1>Nepal Local Connect</h1>
                 <p>Empowering local businesses<br>across the Himalayas</p>
@@ -365,29 +425,34 @@
             <form id="org-register-form">
                 <div class="input-group">
                     <label for="orgName">Organization Name</label>
-                    <input type="text" id="orgName" placeholder="Your organization name" required>
+                    <input type="text" id="orgName" placeholder="Your organization name" required autocomplete="organization">
                 </div>
 
                 <div class="input-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="your@email.com" required>
+                    <input type="email" id="email" placeholder="your@email.com" required autocomplete="email">
                 </div>
 
                 <div class="input-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Create a strong password" required>
+                    <input type="password" id="password" placeholder="Create a strong password" required autocomplete="new-password" minlength="6">
+                    <div class="password-requirements">
+                        <small>Password must be at least 6 characters long</small>
+                    </div>
                 </div>
 
                 <button type="submit">Create Account</button>
             </form>
 
+            <p id="msg" class="message"></p>
+
             <div class="form-footer">
                 <p>Already have an account? <a href="org_login.html">Login here</a></p>
             </div>
- <div class="return-btn-container">
-    <a href="index.html" class="return-btn">Return</a>
-</div>
-            <p id="msg" class="message"></p>
+
+            <div class="return-btn-container">
+                <a href="index.html" class="return-btn">← Return to Home</a>
+            </div>
         </div>
     </div>
 
@@ -410,38 +475,87 @@
         const db = getFirestore(app);
 
         const orgForm = document.getElementById('org-register-form');
+        const submitBtn = orgForm.querySelector('button[type="submit"]');
         const msg = document.getElementById('msg');
 
         orgForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const orgName = document.getElementById('orgName').value;
-            const email = document.getElementById('email').value;
+            
+            const orgName = document.getElementById('orgName').value.trim();
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
 
-            try {
-                msg.className = 'message';
-                msg.style.display = 'none';
+            // Reset message
+            msg.className = 'message';
+            msg.textContent = '';
 
+            // Validation
+            if (!orgName || !email || !password) {
+                msg.className = 'message error';
+                msg.textContent = '❌ Please fill in all fields';
+                return;
+            }
+
+            if (password.length < 6) {
+                msg.className = 'message error';
+                msg.textContent = '❌ Password must be at least 6 characters long';
+                return;
+            }
+
+            try {
+                // Disable button and show loading state
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Creating Account...';
+
+                // Create user account
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
 
-                // Store org in Firestore
+                // Store organization data in Firestore
                 await setDoc(doc(db, "users", user.uid), {
                     name: orgName,
-                    email,
-                    type: "organization"
+                    email: email,
+                    type: "organization",
+                    createdAt: new Date().toISOString()
                 });
 
+                // Success
                 msg.className = "message success";
                 msg.textContent = "✅ Registration successful! Redirecting to login...";
 
+                // Redirect to login page
                 setTimeout(() => {
                     window.location.href = "org_login.html";
                 }, 1500);
 
             } catch (error) {
-                msg.className = "message error";
-                msg.textContent = "❌ " + error.message;
+                console.error('Registration error:', error);
+                
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Create Account';
+
+                // Show error message
+                msg.className = 'message error';
+                
+                // Handle specific error cases
+                let errorMessage = "❌ ";
+                
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage += "This email is already registered. Please login instead.";
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage += "Invalid email address format.";
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage += "Password is too weak. Please use a stronger password.";
+                } else if (error.code === 'auth/operation-not-allowed') {
+                    errorMessage += "Email/password accounts are not enabled. Please contact support.";
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorMessage += "Network error. Please check your internet connection.";
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                msg.textContent = errorMessage;
             }
         });
     </script>
