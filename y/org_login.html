@@ -302,6 +302,36 @@
                 font-size: 26px;
             }
         }
+        
+.return-btn {
+    display: inline-block;
+    text-align: center;
+    width: 20%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    color: white;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+}
+
+.return-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+}
+
+.return-btn:active {
+    transform: translateY(0);
+}
+.return-btn-container {
+    text-align: center;
+    margin-top: 15px;
+}
+
+
     </style>
 </head>
 <body>
@@ -346,7 +376,9 @@
             <div class="form-footer">
                 <p>Don't have an account? <a href="org_register.html">Register here</a></p>
             </div>
-
+                <div class="return-btn-container">
+    <a href="index.html" class="return-btn">Return</a>
+</div>
             <p id="msg" class="message"></p>
         </div>
     </div>

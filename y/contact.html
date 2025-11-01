@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Nepal Local Connect</title>
+  <link rel="stylesheet" href="contact.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f0f4f8;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Navbar */
+.nav {
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  color: #C0392B;
+}
+
+.nav-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #4b5563;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #C0392B;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #C0392B;
+  color: #C0392B;
+}
+
+.btn-outline:hover {
+  background: #667eea;
+  color: white;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #C0392B, #e26052);
+  color: white;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 40px;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.filters label {
+  background: #fff;
+  padding: 12px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.filters label:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.filters select {
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.filters button {
+  background: linear-gradient(135deg, #C0392B, #ff6e5e);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.filters button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  opacity: 0.95;
+}
+
+/* Grid */
+.business-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* Card */
+.business-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.business-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.business-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.no-image {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 48px;
+}
+
+.card-content {
+  padding: 20px 25px;
+}
+
+.card-content h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: #1f2937;
+}
+
+.card-content p {
+  font-size: 14px;
+  margin: 6px 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* Like/Dislike Actions */
+.actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e5e7eb;
+  align-items: center;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid #e5e7eb;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  font-weight: 600;
+  user-select: none;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.action-btn.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.like-btn {
+  color: #059669;
+  border-color: #059669;
+}
+
+.like-btn.active {
+  background: #059669;
+  color: white;
+}
+
+.dislike-btn {
+  color: #dc2626;
+  border-color: #dc2626;
+}
+
+.dislike-btn.active {
+  background: #dc2626;
+  color: white;
+}
+
+.action-icon {
+  font-size: 18px;
+}
+
+.action-count {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.popularity-score {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.popularity-score .score {
+  color: #667eea;
+  font-size: 16px;
+}
+
+.user-action-note {
+  font-size: 12px;
+  color: #10b981;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* Message */
+.message {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 15px;
+  border-radius: 10px;
+  transition: all 0.3s;
+  display: none;
+}
+
+.message.success {
+  background: #d1fae5;
+  color: #065f46;
+  display: block;
+}
+
+.message.info {
+  background: #dbeafe;
+  color: #1e40af;
+  display: block;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 16px;
+  color: #9ca3af;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+  
+  .filters {
+    flex-direction: column;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .actions {
+    flex-wrap: wrap;
+  }
+}
+</style>
+<body>
+    <nav class="nav">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <svg  width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="#C0392B" stroke-width="2" fill="none"/>
+    <polyline points="9 22 9 12 15 12 15 22" stroke="#C0392B" stroke-width="2" fill="none"/>
+      </svg>
+      <span class="nav-title" ><a href="index.html" style="text-decoration: none; color:#2c3e50"> Nepal Local Connect</a></span>
+    </div>
+    
+    <ul class="nav-menu">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="#experiences" class="nav-link">Experiences</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+      <li>
+        <button class="btn btn-outline" onclick="window.location.href='org_login.html'">Log In</button>
+      </li>
+      <li>
+        <button class="btn btn-primary" onclick="window.location.href='org_register.html'">Get Started</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>CONTACT US</h1>
+      <p>We’re here to help you explore authentic Nepal experiences.</p>
+    </div>
+  </section>
+
+  <!-- Quick Links Section -->
+  <section class="quick-links">
+    <div class="container">
+      <div class="links-grid">
+
+        <!-- Telephone -->
+        <div class="link-item">
+          <i class="fa-solid fa-phone"></i>
+          <h3>Customer Service</h3>
+          <button id="telephoneBtn">Find Answers</button>
+        </div>
+
+        <!-- Safety & Warranty -->
+        <div class="link-item">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Safety & Warranty</h3>
+          <button id="warrantyBtn">Learn More</button>
+        </div>
+
+        <!-- Partnership Inquiry -->
+        <div class="link-item">
+          <i class="fas fa-file-signature"></i>
+          <h3>Partnership Inquiry</h3>
+          <button id="partnerBtn">Get in Touch</button>
+        </div>
+
+        <!-- Privacy & Policy -->
+        <div class="link-item">
+          <i class="fas fa-envelope-open-text"></i>
+          <h3>Privacy & Policy</h3>
+          <button id="privacyBtn">Read More</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- Telephone Modal -->
+  <div id="telephoneModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Contact Hotline</h2>
+      <p>Need quick assistance? Our team is available to guide you through trip planning, booking changes, or safety inquiries.</p>
+      <ul>
+        <li><strong>Hotline:</strong> +977-9800000000</li>
+        <li><strong>Availability:</strong> 24/7 support</li>
+        <li><strong>Email:</strong> nepallocalconnect@gmail.com</li>
+        <li><strong>Languages:</strong> English, Nepali, Hindi</li>
+      </ul>
+      <a href="tel:+9779800000000" class="call-now">📞 Call Now</a>
+    </div>
+  </div>
+
+  <!-- Warranty Modal -->
+  <div id="warrantyModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Safety & Warranty Policy</h2>
+      <p>At <strong>Nepal Local Connect</strong>, your safety and satisfaction are our top priorities. We collaborate only with licensed and verified partners to ensure every journey is secure.</p>
+      <ul>
+        <li><strong>Certified Guides:</strong> All guides are government-certified professionals.</li>
+        <li><strong>Emergency Helpline:</strong> 24/7 support during tours and treks.</li>
+        <li><strong>Refund Policy:</strong> Full refund if canceled due to safety risks or weather.</li>
+        <li><strong>Insurance Support:</strong> Guidance for travel insurance claims.</li>
+      </ul>
+      <p>For more info, contact us at <a href="mailto:nepallocalconnect@gmail.com">nepallocalconnect@gmail.com</a>.</p>
+    </div>
+  </div>
+
+  <!-- Partnership Modal -->
+  <div id="partnerModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Partner With Us</h2>
+      <p>Join <strong>Nepal Local Connect</strong> in our mission to promote sustainable and community-based tourism. We welcome collaboration with local guides, homestay owners, and travel organizations.</p>
+      <ul>
+        <li><strong>Eligibility:</strong> Local tourism-based organizations and service providers.</li>
+        <li><strong>Benefits:</strong> Exposure to global travelers, digital presence, and growth support.</li>
+        <li><strong>How to Apply:</strong> Email your proposal with business details.</li>
+      </ul>
+      <p>Send your partnership inquiry to <a href="mailto:partners@nepallocalconnect.com">partners@nepallocalconnect.com</a></p>
+    </div>
+  </div>
+
+  <!-- Privacy Modal -->
+  <div id="privacyModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Privacy & Policy</h2>
+      <p>Your privacy matters to us. We collect only essential information to enhance your travel experience and never share your personal data without consent.</p>
+      <ul>
+        <li><strong>Data Use:</strong> For booking and customer support only.</li>
+        <li><strong>Security:</strong> All data is securely encrypted.</li>
+        <li><strong>Cookies:</strong> Used only for analytics and service improvement.</li>
+        <li><strong>Opt-Out:</strong> You can unsubscribe from marketing emails anytime.</li>
+      </ul>
+      <p>For more info, email us at <a href="mailto:privacy@nepallocalconnect.com">privacy@nepallocalconnect.com</a>.</p>
+    </div>
+  </div>
+
+  <!-- ================= SCRIPT ================= -->
+  <script>
+    // Reusable modal handler
+    const modals = {
+      telephoneBtn: "telephoneModal",
+      warrantyBtn: "warrantyModal",
+      partnerBtn: "partnerModal",
+      privacyBtn: "privacyModal"
+    };
+
+    Object.keys(modals).forEach(btnId => {
+      const btn = document.getElementById(btnId);
+      const modal = document.getElementById(modals[btnId]);
+      const close = modal.querySelector(".close");
+
+      btn.addEventListener("click", () => modal.style.display = "block");
+      close.addEventListener("click", () => modal.style.display = "none");
+      window.addEventListener("click", (e) => {
+        if (e.target === modal) modal.style.display = "none";
+      });
+    });
+  </script>
+
+  <!-- Contact Info Section -->
+  <section class="contact-info">
+    <div class="container info-grid">
+
+
+      <div class="info-block">
+        <h2>Corporate Office</h2>
+        <p>Thamel, Kathmandu<br>Nepal</p>
+        <p><strong>Email:</strong> nepallocalconnect@gmail.com</p>
+        <p><strong>Hours:</strong><br>Mon–Fri: 9AM–6PM</p>
+      </div>
+
+      <div class="info-block">
+        <h2>Tourism Partnerships</h2>
+        <p>For collaboration and B2B travel opportunities.</p>
+        <button>Request Partnership</button>
+        <button class="secondary">Contact Us</button>
+        <p><strong>Phone:</strong> +977-9851000000</p>
+      </div>
+
+      <div class="info-block">
+        <h2>Connect with Us</h2>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>Follow us for the latest adventure updates and travel inspiration.</p>
+      </div>
+
+    </div>
+  </section>
+  <!-- Row 2: Map with Heading -->
+<div class="map-row" style="margin-top: 40px;">
+  <h2 style="text-align: center; color: #c1121f; margin-bottom: 20px;">Our Location</h2>
+  <div class="info-block map-container" style="padding: 0;">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.1004218679755!2d85.30797998987926!3d27.714185536461933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18fc9a83c0cd%3A0xc0495456663927d4!2sNational%20College%20of%20Computer%20Studies!5e0!3m2!1sen!2snp!4v1761972378749!5m2!1sen!2snp" 
+      width="90%" 
+      height="400" 
+      style="border:0; border-radius:12px;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+
+ <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        <span>Nepal Local Connect</span>
+                    </div>
+                    <p class="footer-tagline">
+                        Connecting travelers with authentic local experiences in Nepal.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-btn" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="index.html">Local Guides</a></li>
+                            <li><a href="index.html">Homestays</a></li>
+                            <li><a href="index.html">Adventures</a></li>
+                            <li><a href="index.html">Cultural Activities</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="contact.html">About Us</a></li>
+                            <li><a href="contact.html">Our Mission</a></li>
+                            <li><a href="contact.html">Become a Partner</a></li>
+                            <li><a href="contact.html">Careers</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:nepallocalconnect@gmail.com">nepallocalconnect@gmail.com</a></li>
+                            <li><a href="contact.html">Help Center</a></li>
+                            <li><a href="contact.html">Privacy Policy</a></li>
+                            <li><a href="contact.html">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Nepal Local Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

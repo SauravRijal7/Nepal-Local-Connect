@@ -19,10 +19,10 @@
     <nav class="nav" id="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <svg class="nav-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="#C0392B" stroke-width="2" fill="none"/>
+    <polyline points="9 22 9 12 15 12 15 22" stroke="#C0392B" stroke-width="2" fill="none"/>
+  </svg>
                 <span class="nav-title">Nepal Local Connect</span>
             </div>
             
@@ -77,24 +77,67 @@
             </p>
             <div class="hero-cta">
                 <button class="btn btn-large btn-glass">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                     </svg>
 <span>
-<a href="partners.html" class="partners-link"> Meet our Partners </a>
+<a href="partners.html" style="text-decoration: none ;color:white;"> Meet our Partners </a>
 </span>
 <style>
+
+
 .partners-link {
   display: inline-block;
-  padding: 8px 14px;
+  padding: 12px 20px;
   color: whitesmoke;
   text-decoration: none;
-  border-radius: 6px;
-  transition: 0.3s;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #FF6B6B, #FF9F43); /* gradient like subscription card */
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+  margin: 0 auto; /* center horizontally if in a block container */
 }
+.mission-visual {
+  display: flex;
+  justify-content: center; /* center all cards horizontally */
+  align-items: center;     /* center vertically if needed */
+  gap: 20px;               /* spacing between cards */
+  flex-wrap: wrap;          /* wrap on smaller screens */
+}
+
+.subscription-card {
+  flex: 0 0 40%;           /* width of the subscription card */
+  max-width: 2000px;
+  padding: 52px;
+  background: linear-gradient(135deg, #FF6B6B, #FF9F43);
+  border-radius: 16px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.subscription-card .visual-number {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.subscription-card .visual-label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
 .partners-link:hover {
-  transform: scale(1.3);
-  transition: 2s;
+  transform: scale(1.1); /* smaller hover scale for smoothness */
+  box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+  transition: all 0.3s ease;
 }
+
 </style>
                 </button>
             </div>
@@ -282,19 +325,28 @@
                     <button class="btn btn-large btn-primary">Join Our Community</button>
                 </div>
                 <div class="mission-visual">
-                    <div class="visual-card">
-                        <div class="visual-stat">
-                            <span class="visual-number">95%</span>
-                            <span class="visual-label">Traveler Satisfaction</span>
-                        </div>
-                    </div>
-                    <div class="visual-card">
-                        <div class="visual-stat">
-                            <span class="visual-number">2000+</span>
-                            <span class="visual-label">Happy Travelers</span>
-                        </div>
-                    </div>
-                </div>
+    <div class="visual-card">
+        <div class="visual-stat">
+            <span class="visual-number">95%</span>
+            <span class="visual-label">Traveler Satisfaction</span>
+        </div>
+    </div>
+
+    <div class="visual-card">
+        <div class="visual-stat">
+            <span class="visual-number">2000+</span>
+            <span class="visual-label">Happy Travelers</span>
+        </div>
+    </div>
+
+    <!-- New Highlighted Subscription Card in Middle -->
+    <div class="visual-card subscription-card">
+        <div class="visual-stat">
+            <span class="visual-number">Free Trial 1 Month</span>
+            <span class="visual-label">$9.99 / Month Subscription</span>
+        </div>
+    </div>
+</div>
             </div>
         </div>
     </section>
@@ -339,20 +391,20 @@
                     <div class="footer-column">
                         <h4>Explore</h4>
                         <ul>
-                            <li><a href="#">Local Guides</a></li>
-                            <li><a href="#">Homestays</a></li>
-                            <li><a href="#">Adventures</a></li>
-                            <li><a href="#">Cultural Activities</a></li>
+                            <li><a href="#categories">Local Guides</a></li>
+                            <li><a href="#categories">Homestays</a></li>
+                            <li><a href="#categories">Adventures</a></li>
+                            <li><a href="#categories">Cultural Activities</a></li>
                         </ul>
                     </div>
                     
                     <div class="footer-column">
                         <h4>Company</h4>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Our Mission</a></li>
-                            <li><a href="#">Become a Partner</a></li>
-                            <li><a href="#">Careers</a></li>
+                            <li><a href="contact.html">About Us</a></li>
+                            <li><a href="contact.html">Our Mission</a></li>
+                            <li><a href="contact.html">Become a Partner</a></li>
+                            <li><a href="contact.html">Careers</a></li>
                         </ul>
                     </div>
                     
@@ -360,9 +412,9 @@
                         <h4>Contact</h4>
                         <ul>
                             <li><a href="mailto:nepallocalconnect@gmail.com">nepallocalconnect@gmail.com</a></li>
-                            <li><a href="#">Help Center</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="contact.html">Help Center</a></li>
+                            <li><a href="contact.html">Privacy Policy</a></li>
+                            <li><a href="contact.html">Terms of Service</a></li>
                         </ul>
                     </div>
                 </div>

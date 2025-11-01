@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Partners - Nepal Local Connect</title>
+<link rel="icon" type="image/png" href="logo.png"><title>Our Partners - Nepal Local Connect</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
 body {
@@ -41,7 +41,7 @@ body {
 .nav-logo {
   width: 32px;
   height: 32px;
-  color: #667eea;
+  color: #C0392B;
 }
 
 .nav-title {
@@ -67,7 +67,7 @@ body {
 }
 
 .nav-link:hover {
-  color: #667eea;
+  color: #C0392B;
 }
 
 .btn {
@@ -81,8 +81,8 @@ body {
 
 .btn-outline {
   background: transparent;
-  border: 2px solid #667eea;
-  color: #667eea;
+  border: 2px solid #C0392B;
+  color: #C0392B;
 }
 
 .btn-outline:hover {
@@ -91,7 +91,7 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #C0392B, #e26052);
   color: white;
 }
 
@@ -154,7 +154,7 @@ h1 {
 }
 
 .filters button {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #C0392B, #ff6e5e);
   color: #fff;
   border: none;
   padding: 12px 20px;
@@ -370,11 +370,11 @@ h1 {
 <nav class="nav">
   <div class="nav-container">
     <div class="nav-brand">
-      <svg class="nav-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-        <polyline points="9 22 9 12 15 12 15 22"/>
+      <svg  width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="#C0392B" stroke-width="2" fill="none"/>
+    <polyline points="9 22 9 12 15 12 15 22" stroke="#C0392B" stroke-width="2" fill="none"/>
       </svg>
-      <span class="nav-title">Nepal Local Connect</span>
+      <span class="nav-title" ><a href="index.html" style="text-decoration: none; color:#2c3e50"> Nepal Local Connect</a></span>
     </div>
     
     <ul class="nav-menu">
@@ -416,7 +416,30 @@ h1 {
       </select>
     </label>
 
-    <button id="applyFilters">Apply Filters</button>
+<style>
+  /* Make the Apply Filters button red like #C0392B */
+  #applyFilters {
+    background-color: #C0392B !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+  }
+
+  #applyFilters:hover {
+    background-color: #A93226 !important; /* darker red on hover */
+    transform: translateY(-2px) !important;
+  }
+
+  #applyFilters:active {
+    transform: translateY(0) !important;
+  }
+</style>
+
+<button id="applyFilters">Apply Filters</button>
+
   </div>
 
   <div class="business-grid" id="business-grid">
