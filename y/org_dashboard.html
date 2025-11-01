@@ -69,6 +69,7 @@ body {
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
+<<<<<<< HEAD
   gap: 12px;
   cursor: pointer;
   position: relative;
@@ -91,6 +92,10 @@ body {
 .sidebar a:hover::before,
 .sidebar a.active::before {
   opacity: 0.2;
+=======
+  gap: 10px;
+  cursor: pointer;
+>>>>>>> test
 }
 
 .sidebar a:hover,
@@ -172,7 +177,10 @@ form {
 
 input[type="text"],
 input[type="file"],
+<<<<<<< HEAD
 select,
+=======
+>>>>>>> test
 textarea {
   padding: 14px 18px;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -220,6 +228,7 @@ button.publish-btn {
   box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
 }
 
+<<<<<<< HEAD
 button.publish-btn:hover { 
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
@@ -232,6 +241,9 @@ button.publish-btn:hover {
   color: #fff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+=======
+.message { text-align: center; font-weight: 500; margin-top: 10px; }
+>>>>>>> test
 
 /* View sections */
 .view-section {
@@ -245,6 +257,7 @@ button.publish-btn:hover {
 .no-business {
   text-align: center;
   padding: 40px;
+<<<<<<< HEAD
   color: rgba(255, 255, 255, 0.8);
   font-size: 16px;
 }
@@ -353,10 +366,59 @@ button.publish-btn:hover {
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+=======
+  color: #666;
+}
+
+.business-info {
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.business-info p {
+  margin: 10px 0;
+  color: #444;
+}
+
+.business-info img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 15px;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.review-item {
+  padding: 15px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fafafa;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.rating-stars {
+  color: #f59e0b;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.no-reviews {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+>>>>>>> test
 }
 
 .action-buttons {
   display: flex;
+<<<<<<< HEAD
   gap: 12px;
   margin-top: 30px;
 }
@@ -392,6 +454,37 @@ button.publish-btn:hover {
 .delete-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+=======
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.edit-btn, .delete-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #1e40af;
+}
+
+.delete-btn {
+  background: #e53e3e;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c53030;
+>>>>>>> test
 }
 
 .modal {
@@ -401,8 +494,12 @@ button.publish-btn:hover {
   left: 0;
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
+=======
+  background: rgba(0,0,0,0.5);
+>>>>>>> test
   z-index: 1000;
   align-items: center;
   justify-content: center;
@@ -413,20 +510,30 @@ button.publish-btn:hover {
 }
 
 .modal-content {
+<<<<<<< HEAD
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   padding: 35px;
   border-radius: 20px;
+=======
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+>>>>>>> test
   max-width: 500px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
+<<<<<<< HEAD
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.3);
+=======
+>>>>>>> test
 }
 
 .modal-content h3 {
   margin-top: 0;
+<<<<<<< HEAD
   margin-bottom: 25px;
   color: var(--text-primary);
   font-weight: 700;
@@ -436,10 +543,14 @@ button.publish-btn:hover {
 .modal-content p {
   color: var(--text-secondary);
   line-height: 1.6;
+=======
+  margin-bottom: 20px;
+>>>>>>> test
 }
 
 .modal-buttons {
   display: flex;
+<<<<<<< HEAD
   gap: 12px;
   margin-top: 25px;
 }
@@ -480,18 +591,56 @@ button.publish-btn:hover {
 .confirm-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+=======
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancel-btn {
+  background: #6b7280;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancel-btn:hover {
+  background: #4b5563;
+}
+
+.confirm-btn {
+  background: #e53e3e;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.confirm-btn:hover {
+  background: #c53030;
+>>>>>>> test
 }
 
 #edit-image-preview {
   max-width: 200px;
+<<<<<<< HEAD
   margin-top: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border: 2px solid rgba(243, 156, 18, 0.3);
+=======
+  margin-top: 10px;
+  border-radius: 6px;
+>>>>>>> test
 }
 
 .image-note {
   font-size: 12px;
+<<<<<<< HEAD
   color: var(--text-secondary);
   margin-top: 6px;
   font-style: italic;
@@ -540,6 +689,10 @@ button.publish-btn:hover {
   .business-stats {
     grid-template-columns: 1fr;
   }
+=======
+  color: #666;
+  margin-top: 5px;
+>>>>>>> test
 }
 </style>
 </head>
@@ -547,9 +700,16 @@ button.publish-btn:hover {
 <body>
   <!-- Sidebar -->
   <div class="sidebar">
+<<<<<<< HEAD
     <h2>🏔️ Local Connect</h2>
     <a href="#" class="nav-link active" data-view="dashboard">📊 Dashboard</a>
     <a href="#" class="nav-link" data-view="add-business">➕ Add Business</a>
+=======
+    <h2>Local Connect</h2>
+    <a href="#" class="nav-link active" data-view="dashboard">📊 Dashboard</a>
+    <a href="#" class="nav-link" data-view="add-business">➕ Add Business</a>
+    <a href="#" class="nav-link" data-view="reviews">⭐ Reviews</a>
+>>>>>>> test
     <a href="#" id="logout">🚪 Logout</a>
   </div>
 
@@ -563,7 +723,11 @@ button.publish-btn:hover {
     <!-- Dashboard View -->
     <div class="view-section active" id="dashboard-view">
       <div class="dashboard-card">
+<<<<<<< HEAD
         <h3 style="color: black;">Your Business Overview</h3>
+=======
+        <h3>Your Business Overview</h3>
+>>>>>>> test
         <div id="dashboard-content">
           <p class="no-business">Loading...</p>
         </div>
@@ -573,6 +737,7 @@ button.publish-btn:hover {
     <!-- Add Business View -->
     <div class="view-section" id="add-business-view">
       <div class="dashboard-card">
+<<<<<<< HEAD
         <h3 style="color: black;">Add Your Business</h3>
         <div id="add-business-content">
           <form id="business-form">
@@ -585,6 +750,13 @@ button.publish-btn:hover {
               <option value="Hotel">Hotel</option>
               <option value="Adventure">Adventure</option>
             </select>
+=======
+        <h3>Add Your Business</h3>
+        <div id="add-business-content">
+          <form id="business-form">
+            <input type="text" id="title" placeholder="Business Title" required>
+            <input type="text" id="type" placeholder="Business Type (e.g., Restaurant, Shop, Service)" required>
+>>>>>>> test
             <input type="text" id="contact" placeholder="Contact Number" required>
             <input type="file" id="businessImage" accept="image/*" />
             <p class="image-note">📌 Recommended: Images under 500KB for best performance</p>
@@ -596,6 +768,19 @@ button.publish-btn:hover {
       </div>
     </div>
 
+<<<<<<< HEAD
+=======
+    <!-- Reviews View -->
+    <div class="view-section" id="reviews-view">
+      <div class="dashboard-card">
+        <h3>User Ratings & Comments</h3>
+        <div id="reviews-content">
+          <p class="no-reviews">Loading reviews...</p>
+        </div>
+      </div>
+    </div>
+
+>>>>>>> test
   </div>
 
   <!-- Edit Modal -->
@@ -604,6 +789,7 @@ button.publish-btn:hover {
       <h3>Edit Your Business</h3>
       <form id="edit-form">
         <input type="text" id="edit-title" placeholder="Business Title" required>
+<<<<<<< HEAD
         <select id="edit-type" required>
           <option value="" disabled>Select Business Type</option>
           <option value="Restaurant">Restaurant</option>
@@ -612,6 +798,9 @@ button.publish-btn:hover {
           <option value="Hotel">Hotel</option>
           <option value="Adventure">Adventure</option>
         </select>
+=======
+        <input type="text" id="edit-type" placeholder="Business Type" required>
+>>>>>>> test
         <input type="text" id="edit-contact" placeholder="Contact Number" required>
         <textarea id="edit-description" placeholder="Business Description" required></textarea>
         <input type="file" id="edit-image" accept="image/*" />
@@ -622,7 +811,11 @@ button.publish-btn:hover {
           <button type="submit" class="publish-btn">Save Changes</button>
         </div>
       </form>
+<<<<<<< HEAD
       <p id="edit-msg" class="message" style="color: var(--text-primary);"></p>
+=======
+      <p id="edit-msg" class="message"></p>
+>>>>>>> test
     </div>
   </div>
 
@@ -635,7 +828,11 @@ button.publish-btn:hover {
         <button type="button" class="cancel-btn" id="cancel-delete">Cancel</button>
         <button type="button" class="confirm-btn" id="confirm-delete">Delete</button>
       </div>
+<<<<<<< HEAD
       <p id="delete-msg" class="message" style="color: var(--text-primary);"></p>
+=======
+      <p id="delete-msg" class="message"></p>
+>>>>>>> test
     </div>
   </div>
 
@@ -724,10 +921,18 @@ onAuthStateChanged(auth, async (user) => {
     currentBusinessId = bizSnap.docs[0].id;
     
     loadDashboard();
+<<<<<<< HEAD
     
     // Hide add business form and show message
     document.getElementById('add-business-content').innerHTML = `
       <p style="text-align:center; color:black; padding:40px;">
+=======
+    loadReviews();
+    
+    // Hide add business form and show message
+    document.getElementById('add-business-content').innerHTML = `
+      <p style="text-align:center; color:#666; padding:40px;">
+>>>>>>> test
         ✅ You have already published a business. View it in the Dashboard section.
       </p>
     `;
@@ -736,6 +941,12 @@ onAuthStateChanged(auth, async (user) => {
     document.getElementById('dashboard-content').innerHTML = `
       <p class="no-business">You haven't published a business yet. Click "Add Business" to get started.</p>
     `;
+<<<<<<< HEAD
+=======
+    document.getElementById('reviews-content').innerHTML = `
+      <p class="no-reviews">No reviews yet. Publish your business first to receive reviews.</p>
+    `;
+>>>>>>> test
   }
 });
 
@@ -743,6 +954,7 @@ onAuthStateChanged(auth, async (user) => {
 function loadDashboard() {
   if (!currentBusiness) return;
   
+<<<<<<< HEAD
   const likes = currentBusiness.likes || 0;
   const dislikes = currentBusiness.dislikes || 0;
   const popularityScore = likes - dislikes;
@@ -801,6 +1013,19 @@ function loadDashboard() {
           <button class="edit-btn" id="edit-business-btn">✏️ Edit Business</button>
           <button class="delete-btn" id="delete-business-btn">🗑️ Delete Business</button>
         </div>
+=======
+  const html = `
+    <div class="business-info">
+      <p><strong>📌 Business Title:</strong> ${currentBusiness.title}</p>
+      <p><strong>🏢 Business Type:</strong> ${currentBusiness.type}</p>
+      <p><strong>📞 Contact:</strong> ${currentBusiness.contact}</p>
+      <p><strong>📝 Description:</strong> ${currentBusiness.description}</p>
+      <p><strong>⭐ Average Rating:</strong> ${currentBusiness.ratingAverage || 0}/5</p>
+      ${currentBusiness.businessurl ? `<img src="${currentBusiness.businessurl}" alt="Business Image" />` : ''}
+      <div class="action-buttons">
+        <button class="edit-btn" id="edit-business-btn">✏️ Edit Business</button>
+        <button class="delete-btn" id="delete-business-btn">🗑️ Delete Business</button>
+>>>>>>> test
       </div>
     </div>
   `;
@@ -812,6 +1037,38 @@ function loadDashboard() {
   document.getElementById('delete-business-btn').addEventListener('click', openDeleteModal);
 }
 
+<<<<<<< HEAD
+=======
+// Load Reviews
+async function loadReviews() {
+  if (!currentBusinessId) return;
+  
+  const reviewQuery = query(collection(db, "reviews"), where("businessId", "==", currentBusinessId));
+  const reviewSnap = await getDocs(reviewQuery);
+
+  if (reviewSnap.empty) {
+    document.getElementById('reviews-content').innerHTML = `
+      <p class="no-reviews">No reviews yet. Users will be able to review your business once it's published.</p>
+    `;
+    return;
+  }
+
+  let output = "";
+  reviewSnap.forEach(r => {
+    const data = r.data();
+    const stars = "⭐".repeat(data.rating) + "☆".repeat(5 - data.rating);
+    output += `
+      <div class="review-item">
+        <div class="rating-stars">${stars} (${data.rating}/5)</div>
+        <p style="color:#555; margin:5px 0;">${data.comment}</p>
+      </div>
+    `;
+  });
+
+  document.getElementById('reviews-content').innerHTML = output;
+}
+
+>>>>>>> test
 // ✅ LOGOUT
 logoutBtn.addEventListener("click", async () => {
   await signOut(auth);
@@ -852,7 +1109,11 @@ businessForm.addEventListener('submit', async (e) => {
     // ✅ Convert image to Base64 if selected
     if (file) {
       msg.textContent = "Processing image...";
+<<<<<<< HEAD
       msg.style.color = "#fff";
+=======
+      msg.style.color = "#2563eb";
+>>>>>>> test
       
       // Validate file size (max 1MB for Base64)
       if (file.size > 1 * 1024 * 1024) {
@@ -878,18 +1139,29 @@ businessForm.addEventListener('submit', async (e) => {
       description,
       businessurl: imageBase64,
       createdAt: new Date(),
+<<<<<<< HEAD
       likes: 0,
       dislikes: 0
     });
 
     msg.style.color = "#4ade80";
+=======
+      ratingAverage: 0
+    });
+
+    msg.style.color = "green";
+>>>>>>> test
     msg.textContent = "✅ Business published successfully! Redirecting...";
     businessForm.reset();
     setTimeout(() => location.reload(), 1500);
 
   } catch (err) {
     console.error("Submit error:", err);
+<<<<<<< HEAD
     msg.style.color = "#f87171";
+=======
+    msg.style.color = "red";
+>>>>>>> test
     msg.textContent = "❌ Error: " + err.message;
   }
 });
@@ -930,7 +1202,11 @@ document.getElementById('edit-form').addEventListener('submit', async (e) => {
     // Convert new image if selected
     if (file) {
       editMsg.textContent = "Processing new image...";
+<<<<<<< HEAD
       editMsg.style.color = "var(--text-primary)";
+=======
+      editMsg.style.color = "#2563eb";
+>>>>>>> test
       
       // Validate file size (max 1MB)
       if (file.size > 1 * 1024 * 1024) {
@@ -948,7 +1224,11 @@ document.getElementById('edit-form').addEventListener('submit', async (e) => {
     
     editMsg.textContent = "Updating business details...";
     
+<<<<<<< HEAD
     // Update Firestore document - preserve likes and dislikes
+=======
+    // Update Firestore document
+>>>>>>> test
     await updateDoc(doc(db, "businesses", currentBusinessId), {
       title,
       type,
@@ -958,14 +1238,22 @@ document.getElementById('edit-form').addEventListener('submit', async (e) => {
       updatedAt: new Date()
     });
     
+<<<<<<< HEAD
     editMsg.style.color = "#4ade80";
+=======
+    editMsg.style.color = "green";
+>>>>>>> test
     editMsg.textContent = "✅ Business updated successfully! Refreshing...";
     
     setTimeout(() => location.reload(), 1500);
     
   } catch (err) {
     console.error("Edit form error:", err);
+<<<<<<< HEAD
     editMsg.style.color = "#f87171";
+=======
+    editMsg.style.color = "red";
+>>>>>>> test
     editMsg.textContent = "❌ Error: " + err.message;
   }
 });
@@ -985,18 +1273,30 @@ document.getElementById('confirm-delete').addEventListener('click', async () => 
   
   try {
     deleteMsg.textContent = "Deleting business...";
+<<<<<<< HEAD
     deleteMsg.style.color = "var(--text-primary)";
+=======
+    deleteMsg.style.color = "#2563eb";
+>>>>>>> test
     
     // Delete the business document
     await deleteDoc(doc(db, "businesses", currentBusinessId));
     
+<<<<<<< HEAD
     deleteMsg.style.color = "#4ade80";
+=======
+    deleteMsg.style.color = "green";
+>>>>>>> test
     deleteMsg.textContent = "✅ Business deleted successfully! Redirecting...";
     
     setTimeout(() => location.reload(), 1500);
     
   } catch (err) {
+<<<<<<< HEAD
     deleteMsg.style.color = "#f87171";
+=======
+    deleteMsg.style.color = "red";
+>>>>>>> test
     deleteMsg.textContent = "❌ Error: " + err.message;
   }
 });
