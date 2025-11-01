@@ -6,6 +6,7 @@
 <title>Our Partners - Nepal Local Connect</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <script src="partners.js"></script>
+<link rel="stylesheet" href="index.css">
 <style>
 body {
   font-family: 'Inter', sans-serif;
@@ -122,9 +123,229 @@ h1 {
   padding: 40px;
   color: #666;
 }
+/* Base */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f0f4f8;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+/* Header */
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 40px;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.filters label {
+  background: #fff;
+  padding: 12px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.filters label:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.filters select {
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.filters button {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.filters button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  opacity: 0.95;
+}
+
+/* Grid */
+.business-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* Card */
+.business-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.business-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.business-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.no-image {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 48px;
+}
+
+/* Card content */
+.card-content {
+  padding: 20px 25px;
+}
+
+.card-content h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: #1f2937;
+}
+
+.card-content p {
+  font-size: 14px;
+  margin: 6px 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* Rating */
+.rating {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.star {
+  font-size: 22px;
+  color: #d1d5db;
+  margin-right: 3px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star.selected {
+  color: #facc15;
+}
+
+.star:hover {
+  color: #fbbf24;
+}
+
+.rating-text {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Message */
+.message {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 16px;
+  color: #9ca3af;
+}
+
+/* Responsive adjustments */
+@media(max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+}
+
+
 </style>
 </head>
 <body>
+        <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg class="nav-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span class="nav-title">Nepal Local Connect</span>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#experiences" class="nav-link">Experiences</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="mobile-nav-actions">
+                    <button class="btn btn-outline btn-mobile" onclick="window.location.href='org_login.html'">Log In</button>
+                    <button class="btn btn-primary btn-mobile"onclick="window.location.href='org_register.html'">Get Started</button>
+                </li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    <br>
 <div class="container">
   <h1>Our Partners</h1>
   <!-- Filters -->
@@ -173,7 +394,6 @@ h1 {
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyC_dRLjrZnMVg9XJNXrIHwJQ054TaV6a1U",
   authDomain: "nepal-local-connect-16e2b.firebaseapp.com",
@@ -189,90 +409,91 @@ const db = getFirestore(app);
 const businessGrid = document.getElementById('business-grid');
 const msg = document.getElementById('msg');
 
-// Fetch all businesses
-async function loadBusinesses() {
-  try {
-    const querySnapshot = await getDocs(collection(db, "businesses"));
-    
-    if (querySnapshot.empty) {
-      businessGrid.innerHTML = "<p class='loading'>No businesses found yet.</p>";
-      return;
-    }
-    
-    businessGrid.innerHTML = "";
-    
-    querySnapshot.forEach(docSnap => {
-      const data = docSnap.data();
-      const card = document.createElement('div');
-      card.className = "business-card";
-      
-      // Get the correct image URL field (businessurl from your dashboard)
-      const imageHTML = data.businessurl 
-        ? `<img src="${data.businessurl}" alt="${data.title}" />` 
-        : `<div class="no-image">🏢</div>`;
-      
-      card.innerHTML = `
-        ${imageHTML}
-        <div class="card-content">
-          <h3>${data.title || "Untitled Business"}</h3>
-          <p><strong>Type:</strong> ${data.type || "N/A"}</p>
-          <p><strong>Contact:</strong> ${data.contact || "N/A"}</p>
-          <p><strong>Description:</strong> ${data.description || "No description provided"}</p>
-          
-          <div class="rating" data-id="${docSnap.id}">
-            ${renderStars(data.ratingAverage || 0)}
-            <span class="rating-text">${(data.ratingAverage || 0).toFixed(1)}/5</span>
-          </div>
-        </div>
-      `;
-      
-      businessGrid.appendChild(card);
+const typeFilter = document.getElementById('typeFilter');
+const locationFilter = document.getElementById('locationFilter');
+const ratingFilter = document.getElementById('ratingFilter');
+const applyFiltersBtn = document.getElementById('applyFilters');
 
-      // Add click event for rating
-      const stars = card.querySelectorAll('.star');
-      stars.forEach((star, index) => {
-        star.addEventListener('click', async () => {
-          const newRating = index + 1;
-          try {
-            // Update the rating in Firebase
-            await updateDoc(doc(db, "businesses", docSnap.id), { 
-              ratingAverage: newRating 
-            });
-            
-            msg.textContent = `✅ You rated ${data.title} ${newRating} star(s)!`;
-            msg.style.color = "green";
-            
-            // Refresh the display
-            setTimeout(() => {
-              msg.textContent = "";
-              loadBusinesses();
-            }, 2000);
-            
-          } catch (err) {
-            msg.textContent = `❌ Error: ${err.message}`;
-            msg.style.color = "red";
-          }
-        });
-      });
-    });
-  } catch (error) {
-    businessGrid.innerHTML = `<p class='loading' style='color:red;'>Error loading businesses: ${error.message}</p>`;
-  }
+let allBusinesses = [];
+
+// Fetch once from Firebase
+async function fetchBusinesses() {
+  const snapshot = await getDocs(collection(db, "businesses"));
+  allBusinesses = snapshot.docs.map(docSnap => ({
+    id: docSnap.id,
+    ...docSnap.data()
+  }));
+  renderBusinesses(allBusinesses);
 }
 
-// Helper: render stars HTML
+// Render cards from any array (filtered or full)
+function renderBusinesses(dataArray) {
+  businessGrid.innerHTML = "";
+  if (!dataArray.length) {
+    businessGrid.innerHTML = "<p class='loading'>No businesses found.</p>";
+    return;
+  }
+  dataArray.forEach(b => {
+    const card = document.createElement('div');
+    card.className = "business-card";
+    const imageHTML = b.businessurl 
+      ? `<img src="${b.businessurl}" alt="${b.title}" />`
+      : `<div class="no-image">🏢</div>`;
+    card.innerHTML = `
+      ${imageHTML}
+      <div class="card-content">
+        <h3>${b.title || "Untitled"}</h3>
+        <p><strong>Type:</strong> ${b.type || "-"}</p>
+        <p><strong>Contact:</strong> ${b.contact || "-"}</p>
+        <p><strong>Description:</strong> ${b.description || "-"}</p>
+        <div class="rating" data-id="${b.id}">
+          ${renderStars(b.ratingAverage || 0)}
+          <span class="rating-text">${(b.ratingAverage || 0).toFixed(1)}/5</span>
+        </div>
+      </div>
+    `;
+    businessGrid.appendChild(card);
+
+    // Add rating click
+    card.querySelectorAll('.star').forEach((star, i) => {
+      star.addEventListener('click', async () => {
+        const newRating = i + 1;
+        await updateDoc(doc(db, "businesses", b.id), { ratingAverage: newRating });
+        msg.textContent = `You rated ${b.title} ${newRating} star(s)!`;
+        setTimeout(() => { msg.textContent = ""; }, 2000);
+        await fetchBusinesses(); // refresh allBusinesses after rating
+      });
+    });
+  });
+}
+
+// Star HTML
 function renderStars(rating) {
-  let html = '';
+  let html = "";
   const fullStars = Math.floor(rating);
-  
-  for(let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 5; i++) {
     html += `<span class="star ${i <= fullStars ? 'selected' : ''}">★</span>`;
   }
   return html;
 }
 
-// Load businesses on page load
-loadBusinesses();
+// Apply filters
+applyFiltersBtn.addEventListener('click', () => {
+  const typeVal = typeFilter.value;
+  const locVal = locationFilter.value;
+  const ratingVal = parseInt(ratingFilter.value);
+
+  const filtered = allBusinesses.filter(b => 
+    (typeVal === "" || b.type === typeVal) &&
+    (locVal === "" || b.location === locVal) &&
+    (b.ratingAverage || 0) >= ratingVal
+  );
+  renderBusinesses(filtered);
+});
+
+// Initial load
+fetchBusinesses();
 </script>
+
 </body>
 </html>
